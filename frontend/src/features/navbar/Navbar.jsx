@@ -1,29 +1,12 @@
-import React,{useEffect,useState} from 'react'
 import { MdAccountCircle, MdOutlineFavorite } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
-import axios from 'axios'
-import{useNavigate} from 'react-router-dom'
+import {Link} from "react-router-dom"
+
 export default function Navbar() {
-    const [name,setName]=useState('')
-    const navigate =useNavigate()
-    axios.defaults.withCredentials=true;
-    useEffect(()=>{
-      axios.get('http://localhost:8081')
-      .then(res=>{
-        if(res.data==="Success"){
-           setName({name});
-        } else{
-           navigate('/login');
-        }
-  
-    })
-    .catch(err=>console.log(err));
-    },[])
-  
+
 
   return (
     <div>
-
 
       {/* navbar */}
       <div className="navbar bg-base-100">
@@ -118,17 +101,24 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end p-1">
+          <Link 
+          to = "/cart">
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
+          </Link>
+          <Link 
+          to = "/cart">
+          <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+           1
+        </span>
+        </Link>
+        
           <a className="text-2xl p-3">
             <MdOutlineFavorite></MdOutlineFavorite>
           </a>
           <a className="text-2xl p-3">
-            <button><a href='/login'>
             <MdAccountCircle></MdAccountCircle>
-            </a>
-            </button>
           </a>
         </div>
       </div>

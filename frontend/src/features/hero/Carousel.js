@@ -1,41 +1,45 @@
-import React, { useState } from 'react'
-import {BsFillArrowRightCircleFill, BsFillArrowLeftCircleFill} from "react-icons/bs";
+import React from "react";
+import MultiCarousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
+export default function Carousel() {
 
-export default function Carousel({slides}) {
-
-    let [current, setCurrent] = useState(0);
-    
-    let previousSlide = () => {
-      if(current===0) setCurrent(slides.length-1);
-      else setCurrent(current-1) ;
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
     }
-
-    let nextSlide = () => {
-        if(current===slides.length-1) setCurrent(0);
-        else setCurrent(current + 1) ;
-      }
+  };
 
   return (
-    <div className='overflow-hidden relative'>
-       <div className={`flex transition ease-out duration-400`}
-       style = {{
-        transform: `translateX(-${current * 100}% )`,
-       }}
-       >
-         {slides.map((s) => {
-            return <img src = {s} />
-         })}
-       </div>
-
-       <div className='absolute top-0 h-full w-full justify-between items-center flex text-success px-10 text-xl'>
-        <button onClick={previousSlide}>
-            <BsFillArrowLeftCircleFill></BsFillArrowLeftCircleFill>
-        </button>
-        <button onClick={nextSlide}>
-            <BsFillArrowRightCircleFill></BsFillArrowRightCircleFill>
-        </button>
-       </div>
+    <div className="mx-10 mt-6 ">
+      <MultiCarousel responsive={responsive}>
+        <div className="w-{10px} h-80">
+          <img className="w-full  h-80" src="https://as1.ftcdn.net/v2/jpg/02/66/40/40/1000_F_266404077_U620rNn9gWl7wZ6JT2QG0nSg6k8Xdwfy.jpg"></img>
+        </div>
+        <div>
+          <img  className="w-full h-80"   src="https://as1.ftcdn.net/v2/jpg/02/66/40/40/1000_F_266404077_U620rNn9gWl7wZ6JT2QG0nSg6k8Xdwfy.jpg"></img>
+        </div>
+        <div>
+          <img  className="w-full h-80"  src="https://as1.ftcdn.net/v2/jpg/02/66/40/40/1000_F_266404077_U620rNn9gWl7wZ6JT2QG0nSg6k8Xdwfy.jpg"></img>
+        </div>
+        <div>
+          <img className="w-full h-80"    src="https://as1.ftcdn.net/v2/jpg/02/66/40/40/1000_F_266404077_U620rNn9gWl7wZ6JT2QG0nSg6k8Xdwfy.jpg"></img>
+        </div>
+      </MultiCarousel>;
     </div>
   )
 }

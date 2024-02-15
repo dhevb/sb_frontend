@@ -1,97 +1,71 @@
-import React from "react";
-import {createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Protected from "./features/auth/components/Protected";
+import React from 'react';
+import { Counter } from './features/counter/Counter';
 
-// import all pages
-import Home from "./pages/Home";
-import PageNotFound from "./pages/PageNotFound";
-import CartPage from "./pages/CartPage";
-import Checkout from "./pages/Checkout";
-import ForgotPasswordPage from "./pages/ForgotPasswordPage";
-import LoginPage from "./pages/LoginPage";
-import SignupPage from "./pages/SignupPage";
-import OrderSuccessfullPage from "./pages/OrderSuccessfullPage";
-import ShopPage from "./pages/ShopPage";
-import OrdersPage from "./pages/OrdersPage";
-import PaymentPage from "./pages/PaymentPage";
-import ReplaceOrderPage from "./pages/ReplaceOrderPage";
-import UserProfilePage from "./pages/UserProfilePage";
-import OTPconfirmationPage from "./pages/OTPconfirmationPage";
-import ProductListPage from "./pages/ProductListPage";
 
-// root Routes
+import {
+   createBrowserRouter,
+   RouterProvider,
+   Route,
+   Link,
+}  from  "react-router-dom"
+
+// import all pages here
+import Home from './page/Home';
+import LoginPage from './page/LoginPage'
+import PageNotFound from './page/PageNotFound';
+import ProductListPage from './page/ProductListPage';
+import SignupPage from './page/SignupPage';
+import OTPConfirmationPage from './page/OTPConfirmationPage';
+import CartPage from './page/CartPage';
+import Checkout from './page/Checkout';
+import ProductDetailPage from './page/ProductDetailPage';
+
 const router = createBrowserRouter([
   {
-    path : '/',
-    element : <Home></Home>
+    path: "/",
+    element: <Home/>
   },
   {
-    path : '/shop',
-    element : <ShopPage></ShopPage>
+    path: "/login",
+    element: <LoginPage/>
   },
   {
-    path : '/orders',
-    element : <OrdersPage></OrdersPage>
+    path: "/signup",
+    element: <SignupPage/>
   },
   {
-    path : '/login',
-    element : <LoginPage></LoginPage>
+    path: "/all-products",
+    element: <ProductListPage/>
   },
   {
-    path : '/signup',
-    element : <SignupPage></SignupPage>
+    path: "/confirm-otp",
+    element: <OTPConfirmationPage/>
   },
   {
-    path : '/successfull',
-    element : <OrderSuccessfullPage></OrderSuccessfullPage>
+    path: "/cart",
+    element: <CartPage/>
   },
   {
-    path : '/cart',
-    element : <CartPage></CartPage>
+    path: "/checkout",
+    element: <Checkout/>
   },
   {
-    path : '/checkout',
-    element : <Checkout></Checkout>
+    path: "/product-detail",
+    element: <ProductDetailPage/>
   },
   {
-    path : '/forget',
-    element : <ForgotPasswordPage></ForgotPasswordPage>
-  },
-  {
-    path : '/payment',
-    element : <PaymentPage></PaymentPage>
-  },
-  {
-    path : '/replace',
-    element : <ReplaceOrderPage></ReplaceOrderPage>
-  },
-  {
-    path : '/user-profile',
-    element : <UserProfilePage></UserProfilePage>
-  },
-  {
-    path : '/otp-confirmation',
-    element :<OTPconfirmationPage></OTPconfirmationPage>
-  },
-  {
-    path : '/product-list',
-    element :<ProductListPage></ProductListPage>
-  },
-  {
-    path : '*',
-    element : <PageNotFound></PageNotFound>
-  },
-
-
-
+    path:"*",
+    element: <PageNotFound/>
+  }
 ])
+
 
 
 function App() {
   return (
-    <main>
-      <RouterProvider router = {router}></RouterProvider>
-    </main>
+    <div>
+      <RouterProvider router = {router} />
+    </div>
   );
 }
 
