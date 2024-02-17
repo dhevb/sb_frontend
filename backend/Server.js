@@ -72,6 +72,53 @@ app.post('/login',(req,res)=>{
     });
 });
 
+app.get('/cart', (req, res) => {
+    const sql = 'SELECT * FROM cart';
+    db.query(sql, (err, data) => {
+        if (err) {
+            throw err;
+        }
+        res.json(data);
+    });
+});
+
+// Route to add an item to the cart
+app.post('/cart', (req, res) => {
+    const newItem = req.body;
+    const sql = 'INSERT INTO cart SET ?';
+    db.query(sql, newItem, (err, data) => {
+        if (err) {
+            throw err;
+        }
+        res.status(201).send('Item added to cart successfully');
+    });
+});
+
+// Route to remove an item from the cart
+app.delete('/cart/:itemId', (req, res) => {
+    const itemId = req.params.itemId;
+    const sql = 'DELETE FROM cart WHERE id = ?';
+    db.query(sql, itemId, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.send('Item removed from cart successfully');
+    });
+});
+
+// Route to update quantity of an item in the cart
+app.put('/cart/:itemId', (req, res) => {
+    const itemId = req.params.itemId;
+    const updatedItem = req.body;
+    const sql = 'UPDATE cart SET ? WHERE id = ?';
+    db.query(sql, [updatedItem, itemId], (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.send('Item quantity updated successfully');
+    });
+});
+
 app.listen(8081,()=>{
     console.log("Server is running");
 })
