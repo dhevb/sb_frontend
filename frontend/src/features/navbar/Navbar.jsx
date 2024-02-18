@@ -5,6 +5,7 @@ import {Link} from "react-router-dom"
 export default function Navbar() {
 
 
+
   return (
     <div>
 
@@ -101,8 +102,6 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end p-1">
-          <Link 
-          to = "/cart">
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
@@ -117,9 +116,11 @@ export default function Navbar() {
           <a className="text-2xl p-3">
             <MdOutlineFavorite></MdOutlineFavorite>
           </a>
-          <a className="text-2xl p-3">
+          <button>
+          <a className="text-2xl p-3" href="/login">
             <MdAccountCircle></MdAccountCircle>
           </a>
+          </button>
         </div>
       </div>
 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
-
+import { Link,useNavigate } from 'react-router-dom'
+import Validation from './SignupValidation';
+import axios from 'axios'
 import {
   increment,
   incrementAsync,
@@ -13,12 +14,36 @@ export default function Signup() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
+  const[values,setValues]=useState({
+    name:'',
+    email:'',
+    password:''
 
+      })
+      const navigate=useNavigate();
+      const[errors,setErrors]=useState({})
+      const handleInput=(event)=>{
+        setValues(prev=>({...prev,[event.target.name]:[event.target.value]}))
+  
+      }
+      const handleSubmit=(event)=>{
+        event.preventDefault();
+        setErrors(Validation(values));
+      if(errors.name==="" && errors.email==="" && errors.password==="" ){
+            axios.post('http://localhost:8081/swadeshi',values)
+            .then(res=>{
+                 navigate('/login');
+            })
+      .catch(err=>console.log(err));
+    }
+  }
   return (
     <div className='bg-base-200'>
     
+    
     <div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-md">
+
 
 
       </div>
@@ -27,17 +52,42 @@ export default function Signup() {
         <div className="bg-layer-2 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <h1 className="text-center text-3xl font-semibold text-heading">
             Join Us
+            Join Us
           </h1>
+
+          <p className="mb-4 mt-2 text-center text-sm text-text">
+          Already have account?{" "}
 
           <p className="mb-4 mt-2 text-center text-sm text-text">
           Already have account?{" "}
           <Link
             to="/login"
+            to="/login"
             className="font-semibold text-success hover:text-primary-accent"
           >
             Login
+            Login
           </Link>
         </p>
+
+        <form action="" onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-4">
+        <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-semibold text-heading"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    placeholder="Type your name"
+                    name="name"
+                    type="text"
+                    onChange={handleInput}
+                    className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                   {errors.name &&<span className='text-danger'>{errors.name}</span>}
+              </div>
 
           <form className="mt-6 flex flex-col space-y-4">
             <div>
@@ -46,11 +96,15 @@ export default function Signup() {
                 className="block text-sm font-semibold text-heading"
               >
                 Email or Phone
+                Email or Phone
               </label>
               <input
                 id="email"
                 placeholder="Type your email or phone no."
+                placeholder="Type your email or phone no."
                 name="email"
+                type=""
+                onChange={handleInput}
                 type=""
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
@@ -64,6 +118,7 @@ export default function Signup() {
               </label>
               <input
                 id="password"
+                placeholder="Type password"
                 placeholder="Type password"
                 name="password"
                 type="password"
@@ -85,16 +140,22 @@ export default function Signup() {
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
             </div>
+            
 
             <div className="flex justify-end">
+          
           
             </div>
 
             <Link
               to = "/confirm-otp"
+            <Link
+              to = "/confirm-otp"
               type="submit"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-success bg-success px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
             >
+              Get OTP
+            </Link>
               Get OTP
             </Link>
 
@@ -121,6 +182,7 @@ export default function Signup() {
                 />
               </svg>
               Sign up with Google
+              Sign up with Google
             </button>
           </form>
         </div>
@@ -128,5 +190,6 @@ export default function Signup() {
     </div>
 
     </div>
+  );
   );
 }
