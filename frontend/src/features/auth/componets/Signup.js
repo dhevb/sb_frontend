@@ -40,10 +40,8 @@ export default function Signup() {
   return (
     <div className='bg-base-200'>
     
-    
     <div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
       <div className="flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-md">
-
 
 
       </div>
@@ -52,20 +50,14 @@ export default function Signup() {
         <div className="bg-layer-2 py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <h1 className="text-center text-3xl font-semibold text-heading">
             Join Us
-            Join Us
           </h1>
-
-          <p className="mb-4 mt-2 text-center text-sm text-text">
-          Already have account?{" "}
 
           <p className="mb-4 mt-2 text-center text-sm text-text">
           Already have account?{" "}
           <Link
             to="/login"
-            to="/login"
             className="font-semibold text-success hover:text-primary-accent"
           >
-            Login
             Login
           </Link>
         </p>
@@ -88,26 +80,22 @@ export default function Signup() {
                   />
                    {errors.name &&<span className='text-danger'>{errors.name}</span>}
               </div>
-
-          <form className="mt-6 flex flex-col space-y-4">
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-semibold text-heading"
               >
                 Email or Phone
-                Email or Phone
               </label>
               <input
                 id="email"
                 placeholder="Type your email or phone no."
-                placeholder="Type your email or phone no."
                 name="email"
                 type=""
                 onChange={handleInput}
-                type=""
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
+              {errors.email &&<span className='text-danger'>{errors.email}</span>}
             </div>
             <div>
               <label
@@ -119,45 +107,25 @@ export default function Signup() {
               <input
                 id="password"
                 placeholder="Type password"
-                placeholder="Type password"
                 name="password"
                 type="password"
+                onChange={handleInput}
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-semibold text-heading"
-              >
-               Confirm password
-              </label>
-              <input
-                id="confirm password"
-                placeholder="Type password again"
-                name=" confirm password"
-                type="password"
-                className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
-              />
+              {errors.password &&<span className='text-danger'>{errors.password}</span>}
             </div>
             
 
             <div className="flex justify-end">
           
-          
             </div>
 
-            <Link
-              to = "/confirm-otp"
-            <Link
-              to = "/confirm-otp"
+            <button
               type="submit"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-success bg-success px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
             >
               Get OTP
-            </Link>
-              Get OTP
-            </Link>
+            </button>
 
             <button
               type="button"
@@ -182,7 +150,6 @@ export default function Signup() {
                 />
               </svg>
               Sign up with Google
-              Sign up with Google
             </button>
           </form>
         </div>
@@ -190,6 +157,5 @@ export default function Signup() {
     </div>
 
     </div>
-  );
   );
 }

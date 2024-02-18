@@ -105,7 +105,6 @@ export default function Navbar() {
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
-          </Link>
           <Link 
           to = "/cart">
           <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
