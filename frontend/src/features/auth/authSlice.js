@@ -9,9 +9,9 @@ const initialState = {
 export const incrementAsync = createAsyncThunk(
   'counter/fetchCount',
   async (amount) => {
-    const res = await fetchCount(amount);
+    const response = await fetchCount(amount);
     // The value we return becomes the `fulfilled` action payload
-    return res.data;
+    return response.data;
   }
 );
 

@@ -18,6 +18,7 @@ import SignupPage from './page/SignupPage';
 import OTPConfirmationPage from './page/OTPConfirmationPage';
 import CartPage from './page/CartPage';
 import CheckoutPage from './page/CheckoutPage';
+import ProductDetailPage from './page/ProductDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -35,32 +36,45 @@ const router = createBrowserRouter([
   {
     path: "/all-products",
     element: <ProductListPage/>
+    
   },
   {
     path: "/confirm-otp",
     element: <OTPConfirmationPage/>
+ 
   },
   {
     path: "/cart",
     element: <CartPage/>
   },
+  
   {
     path: "/checkout",
-    element: <CheckoutPage/>
+    element: <CheckoutPage/>,
+   
+  },
+  {
+    path: "/product-detail",
+    element: <ProductDetailPage/>
   },
   {
     path:"*",
     element: <PageNotFound/>
-  }
+  },
+ 
 ])
+
 
 
 
 function App() {
   return (
+    <>
     <div>
       <RouterProvider router = {router} />
     </div>
+  
+    </>
   );
 }
 

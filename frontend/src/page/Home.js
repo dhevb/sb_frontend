@@ -14,9 +14,10 @@ export default function Home() {
    
 
   return (
-    <div>
+    <div className='bg-base-200'>
         <Header/>
         <Navbar/>
+    <div className='mt-2'></div>    
         <CategoriesSlides/>
         <Carousel/>
 
