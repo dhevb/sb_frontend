@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link,useNavigate } from 'react-router-dom'
 import Validation from './SignupValidation';
-import axios from 'axios'
+import axios from 'axios';
 import {
   increment,
   incrementAsync,
@@ -11,15 +11,14 @@ import {
 
 
 export default function Signup() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
+ 
 
   const[values,setValues]=useState({
     name:'',
     email:'',
     password:''
 
-      })
+    })
       const navigate=useNavigate();
       const[errors,setErrors]=useState({})
       const handleInput=(event)=>{
@@ -120,13 +119,14 @@ export default function Signup() {
           
             </div>
 
-            <button
+          
+           <button
               type="submit"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-success bg-success px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
             >
               Get OTP
-            </button>
-
+           
+</button>
             <button
               type="button"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 text-sm font-semibold  text-text shadow-sm hover:text-heading focus:text-heading focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:text-text dark:focus:ring-white/80"
