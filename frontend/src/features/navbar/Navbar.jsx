@@ -1,5 +1,6 @@
 import { MdAccountCircle, MdOutlineFavorite } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
+import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
 
 export default function Navbar() {
@@ -95,7 +96,7 @@ export default function Navbar() {
               <option>Stationary</option>
             </select>
             <div className="indicator">
-              <button className="btn join-item btn-success">Search</button>
+              <button className="btn join-item btn-success"><CiSearch className="w-6 h-6 text-white"/></button>
             </div>
           </div>
         </div>
@@ -143,7 +144,7 @@ export default function Navbar() {
           <option>Stationary</option>
         </select>
         <div className="indicator">
-          <button className="btn join-item btn-success">Search</button>
+          <button className="btn join-item btn-success"><CiSearch></CiSearch></button>
         </div>
       </div>
       <hr></hr>
