@@ -11,8 +11,7 @@ import {
 
 
 export default function Login() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
+
 
   const[values,setValues]=useState({
     email:'',
