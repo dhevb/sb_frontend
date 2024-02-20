@@ -13,7 +13,7 @@ const ordersRouter = require('./routes/Order');
 
 //middlewares
 server.use(cors({
-    exposedHeaders:['7']
+    exposedHeaders:['X-Total-Count']
 }))
 server.use(express.json()); // to parse req.body
 server.use('/products', productsRouter)
@@ -43,7 +43,7 @@ async function main(){
         res.json({status:'success'})
     });
     
-    server.listen(8080, ()=>{
+    server.listen(8081, ()=>{
         console.log('server started')
     });
 }
