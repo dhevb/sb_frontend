@@ -1,11 +1,17 @@
 const express = require('express');
+const router = express.Router();
 const { createProduct, fetchAllProducts, fetchProductById, updateProduct } = require('../controller/Product');
 
-const router = express.Router();
-//  /products is already added in base path
-router.post('/', createProduct)
-      .get('/', fetchAllProducts)
-      .get('/:id', fetchProductById)
-      .patch('/:id', updateProduct)
+// Route to create a new product
+router.post('/', createProduct);
 
-exports.router = router;
+// Route to fetch all products with optional filtering, pagination, and sorting
+router.get('/', fetchAllProducts);
+
+// Route to fetch a product by its ID
+router.get('/:id', fetchProductById);
+
+// Route to update a product by its ID
+router.put('/:id', updateProduct);
+
+module.exports = router;

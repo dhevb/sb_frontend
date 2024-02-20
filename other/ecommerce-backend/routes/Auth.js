@@ -1,8 +1,11 @@
 const express = require('express');
+const router = express.Router();
 const { createUser, loginUser } = require('../controller/Auth');
 
-const router = express.Router();
-//  /auth is already added in base path
-router.post('/signup', createUser).post('/login', loginUser);
+// Route for creating a new user
+router.post('/signup', createUser);
 
-exports.router = router;
+// Route for user login
+router.post('/login', loginUser);
+
+module.exports = router;

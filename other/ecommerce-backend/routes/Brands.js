@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { fetchBrands, createBrand } = require('../controller/Brand');
 
+// Route to fetch all brands
+router.get('/', fetchBrands);
 
-//  brands is already added in base path
-router.get('/', fetchBrands)
-      .post('/', createBrand);
+// Route to create a new brand
+router.post('/', createBrand);
 
-exports.router = router;
+module.exports = router;
