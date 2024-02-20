@@ -1,63 +1,105 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {Link,useNavigate} from 'react-router-dom'
+import Validation from './LoginValidation';
+import axios from 'axios'
+import {
+  increment,
+  incrementAsync,
+  selectCount,
+} from '../authSlice';
 
-import { increment, incrementAsync, selectCount } from "../authSlice";
 
 export default function Login() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
+  const[values,setValues]=useState({
+    email:'',
+    password:''
+
+      })
+      const navigate=useNavigate();
+      const[errors,setErrors]=useState({})
+      const handleInput=(event)=>{
+        setValues(prev=>({...prev,[event.target.name]:[event.target.value]}))
+  
+      }
+      axios.defaults.withCredentials=true;
+      const handleSubmit=(event)=>{
+      event.preventDefault();
+      setErrors(Validation(values));
+      if(errors.email==="" && errors.password==="" ){
+          axios.post('http://localhost:8081/login',values)
+          .then(res=>{
+              if(res.data==="Success"){
+                navigate('/');
+              }else{
+                alert("no record");
+              }
+          })
+      .catch(err=>console.log(err));
+  }
+}
+
   return (
     <div>
-      <div className="bg-base-200">
-        <div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
-          <div className="flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-md"></div>
-          <div className="mt-8 sm:mx-auto bg-base-100 sm:w-full sm:max-w-md">
-            <div className="bg-layer-2 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-              <h1 className="text-center text-3xl font-semibold text-heading">
-                Welcome Back!
-              </h1>
-              <p className="mt-2 mb-4 text-center text-sm text-text">
-                No account?{" "}
-                <Link
-                  to="/signup"
-                  className="font-semibold text-success hover:text-primary-accent"
-                >
-                  Sign up
-                </Link>
-              </p>
-              <form className="mt-6 flex flex-col space-y-4">
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold text-heading"
-                  >
-                    Email or phone
-                  </label>
-                  <input
-                    id="email"
-                    placeholder="Type your email or phone no."
-                    name="email"
-                    type="email"
-                    className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-semibold text-heading"
-                  >
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    name="password"
-                    placeholder="Type your password"
-                    type="password"
-                    className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
-                  />
-                </div>
+    <div className='bg-base-200'>
+
+<div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
+  <div className="flex flex-col justify-center sm:mx-auto sm:w-full sm:max-w-md">
+
+  </div>
+
+  <div className="mt-8 sm:mx-auto bg-base-100 sm:w-full sm:max-w-md">
+    <div className="bg-layer-2 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <h1 className="text-center text-3xl font-semibold text-heading">
+        Welcome Back!
+      </h1>
+      <p className="mt-2 mb-4 text-center text-sm text-text">
+      No account?{" "}
+      <Link
+        to="/signup"
+        className="font-semibold text-success hover:text-primary-accent"
+      >
+        Sign up
+      </Link>
+    </p>
+    <form action=""onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-4">
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-sm font-semibold text-heading"
+          >
+            Email or phone
+          </label>
+          <input
+            id="email"
+            placeholder='Type your email or phone no.'
+            name="email"
+            type="email"
+            onChange={handleInput}
+            className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+          />
+          {errors.email &&<span className='text-danger'>{errors.email}</span>}
+        </div>
+        <div>
+          <label
+            htmlFor="password"
+            className="block text-sm font-semibold text-heading"
+          >
+            Password
+          </label>
+          <input
+            id="password"
+            name="password"
+            placeholder='Type your password'
+            type="password"
+            onChange={handleInput}
+            className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+          />
+          {errors.password &&<span className='text-danger'>{errors.password}</span>}
+        </div>
 
                 <div className="flex justify-end">
                   <a
@@ -107,3 +149,4 @@ export default function Login() {
     </div>
   );
 }
+

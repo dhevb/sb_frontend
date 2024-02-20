@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'
-
+import { Link,useNavigate } from 'react-router-dom'
+import Validation from './SignupValidation';
+import axios from 'axios'
 import {
   increment,
   incrementAsync,
@@ -13,7 +14,29 @@ export default function Signup() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
 
+  const[values,setValues]=useState({
+    name:'',
+    email:'',
+    password:''
 
+      })
+      const navigate=useNavigate();
+      const[errors,setErrors]=useState({})
+      const handleInput=(event)=>{
+        setValues(prev=>({...prev,[event.target.name]:[event.target.value]}))
+  
+      }
+      const handleSubmit=(event)=>{
+        event.preventDefault();
+        setErrors(Validation(values));
+      if(errors.name==="" && errors.email==="" && errors.password==="" ){
+            axios.post('http://localhost:8081/swadeshi',values)
+            .then(res=>{
+                 navigate('/login');
+            })
+      .catch(err=>console.log(err));
+    }
+  }
   return (
     <div className='bg-base-200'>
     
@@ -39,7 +62,24 @@ export default function Signup() {
           </Link>
         </p>
 
-          <form className="mt-6 flex flex-col space-y-4">
+        <form action="" onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-4">
+        <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-semibold text-heading"
+                  >
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    placeholder="Type your name"
+                    name="name"
+                    type="text"
+                    onChange={handleInput}
+                    className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+                  />
+                   {errors.name &&<span className='text-danger'>{errors.name}</span>}
+              </div>
             <div>
               <label
                 htmlFor="email"
@@ -52,8 +92,10 @@ export default function Signup() {
                 placeholder="Type your email or phone no."
                 name="email"
                 type=""
+                onChange={handleInput}
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
+              {errors.email &&<span className='text-danger'>{errors.email}</span>}
             </div>
             <div>
               <label
@@ -67,36 +109,23 @@ export default function Signup() {
                 placeholder="Type password"
                 name="password"
                 type="password"
+                onChange={handleInput}
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
+              {errors.password &&<span className='text-danger'>{errors.password}</span>}
             </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-semibold text-heading"
-              >
-               Confirm password
-              </label>
-              <input
-                id="confirm password"
-                placeholder="Type password again"
-                name=" confirm password"
-                type="password"
-                className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
-              />
-            </div>
+            
 
             <div className="flex justify-end">
           
             </div>
 
-            <Link
-              to = "/confirm-otp"
+            <button
               type="submit"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-success bg-success px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
             >
               Get OTP
-            </Link>
+            </button>
 
             <button
               type="button"

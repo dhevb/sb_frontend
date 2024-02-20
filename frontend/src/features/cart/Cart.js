@@ -44,7 +44,7 @@ export default function Cart() {
     const [open, setOpen] = useState(true)
 
     return (
-      <div className='bg-base-100 mx-auto px-20 py-2'>
+      <div className='bg-base-100 mx-20 my-2'>
            <div className="px-20 py-10">
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
@@ -84,7 +84,7 @@ export default function Cart() {
                                       <div className="flex">
                                         <button
                                           type="button"
-                                          className="font-medium text-red-700 hover:text-red-500"
+                                          className="font-medium text-indigo-600 hover:text-indigo-500"
                                         >
                                           Remove
                                         </button>
@@ -105,12 +105,12 @@ export default function Cart() {
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                         <div className="mt-6">
-                          <Link
-                            to="/checkout"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-success px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-green-500"
+                          <a
+                            href="#"
+                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                           >
                             Checkout
-                          </Link>
+                          </a>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
@@ -118,7 +118,7 @@ export default function Cart() {
                             <Link
                               to = "/"
                               type="button"
-                              className="font-medium text-success hover:text-green-500"
+                              className="font-medium text-indigo-600 hover:text-indigo-500"
                               onClick={() => setOpen(false)}
                             >
                               Continue Shopping
@@ -130,3 +130,4 @@ export default function Cart() {
       </div>
   );
 }
+
