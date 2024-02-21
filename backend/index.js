@@ -14,11 +14,11 @@ const bodyParser=require('body-parser');
 
 
 
-//middlewares
+//middlewares attached
 server.use(cors({
     exposedHeaders:['X-Total-Count']
 }))
-server.use(express.json()); // to parse req.body
+server.use(express.json()); // to parse the req.body
 server.use('/products', productsRouter)
 server.use('/categories', categoriesRouter)
 server.use('/brands', brandsRouter)
