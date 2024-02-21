@@ -14,12 +14,12 @@ export default function Signup() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
-  const handleInput = (event) => {
-    setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleInput = (data) => {
+    setValues(prev => ({ ...prev, [data.target.name]: data.target.value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (data) => {
+    data.preventDefault();
     setErrors(Validation(values));
     if (errors.name === "" && errors.email === "" && errors.password === "") {
       createUser(values) // Use createUser function from authApi

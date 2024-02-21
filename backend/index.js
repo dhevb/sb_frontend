@@ -10,6 +10,9 @@ const usersRouter = require('./routes/Users');
 const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
 const ordersRouter = require('./routes/Order');
+const bodyParser=require('body-parser');
+
+
 
 //middlewares
 server.use(cors({
@@ -44,6 +47,6 @@ async function main(){
     });
     
     server.listen(8081, ()=>{
-        console.log('server started')
+        console.log('server started ')
     });
 }

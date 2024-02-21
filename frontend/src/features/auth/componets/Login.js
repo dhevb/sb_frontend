@@ -14,23 +14,19 @@ export default function Login() {
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
 
-  const handleInput = (event) => {
-    setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
+  const handleInput = (data) => {
+    setValues(prev => ({ ...prev, [data.target.name]: data.target.value }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (data) => {
+    data.preventDefault();
     setErrors(Validation(values));
     if (errors.email === "" && errors.password === "") {
       checkUser(values) // Use checkUser function from authApi
-        .then((res) => {
-          if (res.data === "Success") {
+         .then((res) => {
             navigate('/');
-          } else {
-            alert("no record");
-          }
-        })
-        .catch((err) => console.log(err));
+          }) 
+       .catch((err) => console.log(err));
     }
   };
 
