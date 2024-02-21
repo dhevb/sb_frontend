@@ -1,45 +1,34 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import {Link,useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import Validation from './LoginValidation';
-import axios from 'axios'
 import {
-  increment,
-  incrementAsync,
-  selectCount,
-} from '../authSlice';
-
+  createUser,
+  checkUser,
+} from '../authAPI'; // Import the API functions
 
 export default function Login() {
+  const [values, setValues] = useState({
+    email: '',
+    password: ''
+  });
+  const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
 
+  const handleInput = (data) => {
+    setValues(prev => ({ ...prev, [data.target.name]: data.target.value }));
+  };
 
-  const[values,setValues]=useState({
-    email:'',
-    password:''
-
-      })
-      const navigate=useNavigate();
-      const[errors,setErrors]=useState({})
-      const handleInput=(event)=>{
-        setValues(prev=>({...prev,[event.target.name]:[event.target.value]}))
-  
-      }
-      axios.defaults.withCredentials=true;
-      const handleSubmit=(event)=>{
-      event.preventDefault();
-      setErrors(Validation(values));
-      if(errors.email==="" && errors.password==="" ){
-          axios.post('http://localhost:8081/login',values)
-          .then(res=>{
-              if(res.data==="Success"){
-                navigate('/');
-              }else{
-                alert("no record");
-              }
-          })
-      .catch(err=>console.log(err));
-  }
-}
+  const handleSubmit = (data) => {
+    data.preventDefault();
+    setErrors(Validation(values));
+    if (errors.email === "" && errors.password === "") {
+      checkUser(values) // Use checkUser function from authApi
+         .then((res) => {
+            navigate('/');
+          }) 
+       .catch((err) => console.log(err));
+    }
+  };
 
   return (
     <div>

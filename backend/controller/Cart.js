@@ -1,0 +1,62 @@
+const mysql = require('mysql2/promise');
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'swadeshi',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+exports.fetchCartByUser = async (req, res) => {
+  const { user } = req.query;
+  try {
+    const connection = await pool.getConnection();
+    const [results, fields] = await connection.execute('SELECT * FROM carts WHERE user_id = ?', [user]);
+    connection.release();
+    res.status(200).json(results);
+  } catch (err) {
+    console.error('Error fetching cart items:', err);
+    res.status(400).json({ message: 'Error fetching cart items' });
+  }
+};
+
+exports.addToCart = async (req, res) => {
+  try {
+    const connection = await pool.getConnection();
+    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id) VALUES (?, ?, ?)', [req.body.quantity, req.body.product, req.body.user]);
+    connection.release();
+    res.status(201).json({ id: result.insertId, ...req.body });
+  } catch (err) {
+    console.error('Error adding to cart:', err);
+    res.status(400).json({ message: 'Error adding to cart' });
+  }
+};
+
+exports.deleteFromCart = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const connection = await pool.getConnection();
+    await connection.execute('DELETE FROM carts WHERE id = ?', [id]);
+    connection.release();
+    res.status(200).json({ message: 'Cart item deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting from cart:', err);
+    res.status(400).json({ message: 'Error deleting from cart' });
+  }
+};
+
+exports.updateCart = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const connection = await pool.getConnection();
+    await connection.execute('UPDATE carts SET quantity = ?, product_id = ?, user_id = ? WHERE id = ?', [req.body.quantity, req.body.product, req.body.user, id]);
+    connection.release();
+    res.status(200).json({ id, ...req.body });
+  } catch (err) {
+    console.error('Error updating cart:', err);
+    res.status(400).json({ message: 'Error updating cart' });
+  }
+};
