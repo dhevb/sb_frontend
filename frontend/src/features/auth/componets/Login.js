@@ -9,7 +9,8 @@ import {
 export default function Login() {
   const [values, setValues] = useState({
     email: '',
-    password: ''
+    password: '',
+    
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -69,7 +70,7 @@ export default function Login() {
             onChange={handleInput}
             className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
           />
-          {errors.email &&<span className='text-danger'>{errors.email}</span>}
+          {errors.email &&<span className="text-red-500">{errors.email}</span>}
         </div>
         <div>
           <label
@@ -86,12 +87,12 @@ export default function Login() {
             onChange={handleInput}
             className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
           />
-          {errors.password &&<span className='text-danger'>{errors.password}</span>}
+          {errors.password &&<span className="text-red-500">{errors.password}</span>}
         </div>
 
                 <div className="flex justify-end">
                   <a
-                    href="#"
+                    href="/forgot-password"
                     className="text-sm font-semibold text-success hover:text-primary-accent"
                   >
                     Forgot password?
