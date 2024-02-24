@@ -34,6 +34,26 @@ export function checkUser(loginInfo) {
     // TODO: on server it will only return some info of user (not password)
   });
 }
+export function ForgotPassword(email) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await fetch('http://localhost:8081/auth/forgot-password', {
+        method: 'POST',
+        body: JSON.stringify({ email }),
+        headers: { 'content-type': 'application/json' },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        resolve({ data });
+      } else {
+        const error = await response.json();
+        reject(error);
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
 
 export function signOut(userId) {
   return new Promise(async (resolve) => {
