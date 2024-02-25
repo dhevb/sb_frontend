@@ -57,7 +57,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.ForgotPassword = async (req, res) => {
+exports.F
+forgotPassword = async (req, res) => {
   try {
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [req.body.email]);
