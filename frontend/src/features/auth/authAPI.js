@@ -39,7 +39,7 @@ export function ForgotPassword(email) {
     try {
       const response = await fetch('http://localhost:8081/auth/forgot-password', {
         method: 'POST',
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(email),
         headers: { 'content-type': 'application/json' },
       });
       if (response.ok) {

@@ -45,20 +45,24 @@ exports.loginUser = async (req, res) => {
   }
 };
 
-
 const nodemailer = require('nodemailer');
 
-// Nodemailer transporter
+// Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-  service: 'Gmail',
+  host: 'smtp.example.com', // Replace with your SMTP host
+  port: 587, // Replace with your SMTP port (usually 587 for TLS)
+  secure: false, // true for 465, false for other ports
   auth: {
-    user: 'kandarisonal21200@gmail.com', // Your Gmail email address
-    pass: 'Sonal21200@', // Your Gmail password
+    user: 'your_smtp_username', // Replace with your SMTP username
+    pass: 'your_smtp_password', // Replace with your SMTP password
   },
+  tls: {
+    // Insecure TLS configuration (don't use this in production)
+    rejectUnauthorized: false
+  }
 });
 
-exports.F
-forgotPassword = async (req, res) => {
+exports.ForgotPassword = async (req, res) => {
   try {
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [req.body.email]);
@@ -79,7 +83,7 @@ forgotPassword = async (req, res) => {
 
     // Send reset password email
     const mailOptions = {
-      from: 'kandarisonal21200@gmail.com',
+      from: 'your_sender_email@example.com', // Replace with your sender email
       to: req.body.email,
       subject: 'Password Reset',
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,
