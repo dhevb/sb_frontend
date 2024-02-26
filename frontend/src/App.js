@@ -17,7 +17,7 @@ import OTPConfirmationPage from './page/OTPConfirmationPage';
 import CartPage from './page/CartPage';
 import CheckoutPage from './page/CheckoutPage';
 import ProductDetailPage from './page/ProductDetailPage';
-
+import ForgotPassword from './features/auth/componets/ForgotPassword';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +54,10 @@ const router = createBrowserRouter([
     path: "/checkout",
     element: <CheckoutPage/>,
    
+  },
+  {
+    path: "/product-detail",
+    element: <ProductDetailPage/>
   },
   {
     path:"*",
