@@ -5,8 +5,6 @@ import { Counter } from './features/counter/Counter';
 import {
    createBrowserRouter,
    RouterProvider,
-   Route,
-   Link,
 }  from  "react-router-dom"
 
 // import all pages here
@@ -26,6 +24,14 @@ const router = createBrowserRouter([
     element: <Home/>
   },
   {
+    path: "/all-products",
+    element: <ProductListPage/>  
+  },
+  {
+    path: "/product-detail/:id",
+    element: <ProductDetailPage/>
+  },
+  {
     path: "/login",
     element: <LoginPage/>
   },
@@ -33,11 +39,7 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignupPage/>
   },
-  {
-    path: "/all-products",
-    element: <ProductListPage/>
-    
-  },
+
   {
     path: "/confirm-otp",
     element: <OTPConfirmationPage/>
@@ -52,10 +54,6 @@ const router = createBrowserRouter([
     path: "/checkout",
     element: <CheckoutPage/>,
    
-  },
-  {
-    path: "/product-detail",
-    element: <ProductDetailPage/>
   },
   {
     path:"*",
