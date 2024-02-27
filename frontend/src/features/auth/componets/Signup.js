@@ -50,12 +50,33 @@ export default function Signup() {
               noValidate
               onSubmit={handleSubmit((data)=>{
                 dispatch(
-                  createUserAsync({email:data.email, password:data.password})
+                  createUserAsync({name:data.name,email:data.email, password:data.password})
                   );
-                console.log(data);
+                
               })} 
-              className="mt-6 flex flex-col space-y-4">
-       
+              
+              className="mt-6 flex flex-col space-y-4"
+              
+              method='POST'>
+                   <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-semibold text-heading"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                placeholder="Type your email or phone no."
+                {...register("name", {
+                  required:"Name is required", 
+               })}
+                type="name"
+                className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+                
+              />
+              {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+            </div>
             <div>
               <label
                 htmlFor="email"
