@@ -7,12 +7,12 @@ import { selectItems } from "../cart/cartSlice";
 
 
 export default function Navbar() {
+  const [searchQuery, setSearchQuery] = useState('');
 
 const items = useSelector(selectItems);
 
   return (
     <div>
-
       {/* navbar */}
       <div className="navbar bg-base-100">
         <div className="navbar-start">
@@ -88,6 +88,8 @@ const items = useSelector(selectItems);
                 <input
                   className="input input-bordered join-item"
                   placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -100,7 +102,9 @@ const items = useSelector(selectItems);
               <option>Stationary</option>
             </select>
             <div className="indicator">
-              <button className="btn join-item btn-success"><CiSearch className="w-6 h-6 text-white"/></button>
+              <button className="btn join-item btn-success" onClick={handleSearch}>
+                <CiSearch className="w-6 h-6 text-white"/>
+              </button>
             </div>
           </div>
         </div>
@@ -125,37 +129,42 @@ const items = useSelector(selectItems);
             <MdOutlineFavorite></MdOutlineFavorite>
           </a>
           <button>
-          <a className="text-2xl p-3" href="/login">
-            <MdAccountCircle></MdAccountCircle>
-          </a>
+            <a className="text-2xl p-3" href="/login">
+              <MdAccountCircle></MdAccountCircle>
+            </a>
           </button>
         </div>
       </div>
 
       {/* search bar for small screen starts */}
       <div className="flex item-center justify-center sm:hidden ">
-      <div className="join ">
-        <div>
+        <div className="join ">
           <div>
-            <input
-              className="input input-bordered join-item"
-              placeholder="Search"
-            />
+            <div>
+              <input
+                className="input input-bordered join-item"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <select className="select select-bordered join-item hidden">
+            <option disabled selected>
+              Filter
+            </option>
+            <option>Books</option>
+            <option>Decoration</option>
+            <option>Stationary</option>
+          </select>
+          <div className="indicator">
+          <CiSearch>
+            <button className="btn join-item btn-success" onClick={handleSearch}>
+            </button>
+            </CiSearch>
           </div>
         </div>
-        <select className="select select-bordered join-item hidden">
-          <option disabled selected>
-            Filter
-          </option>
-          <option>Books</option>
-          <option>Decoration</option>
-          <option>Stationary</option>
-        </select>
-        <div className="indicator">
-          <button className="btn join-item btn-success"><CiSearch></CiSearch></button>
-        </div>
-      </div>
-      <hr></hr>
+        <hr></hr>
       </div>
       {/* search bar for small screen ends */}
     </div>

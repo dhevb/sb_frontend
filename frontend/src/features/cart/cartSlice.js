@@ -4,6 +4,7 @@ import { addToCart, fetchItemsByUserId, updateCart, deleteItemFromCart } from '.
 const initialState = {
   status: 'idle',
   items: [],
+  items: [],
 };
 
 export const addToCartAsync = createAsyncThunk(
@@ -45,10 +46,12 @@ export const deleteItemFromCartAsync = createAsyncThunk(
 
 export const counterSlice = createSlice({
   name: 'cart',
+  name: 'cart',
   initialState,
   reducers: {
     increment: (state) => {
       state.value += 1;
+    },
     },
   },
   extraReducers: (builder) => {

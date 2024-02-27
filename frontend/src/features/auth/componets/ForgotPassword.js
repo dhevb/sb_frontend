@@ -13,13 +13,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (data) => {
     data.preventDefault();
     try {
-      const response = await fetch('/authAPI/forgot-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email })
-      });
+      const response = await ForgotPassword(email);
       const responseData = await response.json();
       setMessage(responseData.message);
       setError('');
