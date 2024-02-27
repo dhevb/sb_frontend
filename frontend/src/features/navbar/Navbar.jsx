@@ -2,10 +2,13 @@ import { MdAccountCircle, MdOutlineFavorite } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
+import { useSelector } from "react-redux";
+import { selectItems } from "../cart/cartSlice";
+
 
 export default function Navbar() {
 
-
+const items = useSelector(selectItems);
 
   return (
     <div>
@@ -103,14 +106,19 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end p-1">
+
+        <Link 
+          to = "/cart">  
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
-          <Link 
-          to = "/cart">
-          <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-           1
-        </span>
+        </Link>
+      
+      <Link 
+          to = "/cart">   
+      {items.length>0 && <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+      {items.length}
+    </span>}
         </Link>
         
           <a className="text-2xl p-3">
