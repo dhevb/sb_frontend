@@ -1,15 +1,24 @@
-import { MdAccountCircle, MdOutlineFavorite } from "react-icons/md";
-import { FaCartShopping } from "react-icons/fa6";
-import { CiSearch } from "react-icons/ci";
-import {Link} from "react-router-dom"
+import { useState } from 'react';
+import { MdAccountCircle, MdOutlineFavorite } from 'react-icons/md';
+import { FaCartShopping } from 'react-icons/fa6';
+import { CiSearch } from 'react-icons/ci';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+  const [searchQuery, setSearchQuery] = useState('');
 
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
+  const handleSearch = () => {
+    // Perform search action here
+    console.log('Search query:', searchQuery);
+    // You can implement search logic or navigate to search results page here
+  };
 
   return (
     <div>
-
       {/* navbar */}
       <div className="navbar bg-base-100">
         <div className="navbar-start">
@@ -85,6 +94,8 @@ export default function Navbar() {
                 <input
                   className="input input-bordered join-item"
                   placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -97,7 +108,9 @@ export default function Navbar() {
               <option>Stationary</option>
             </select>
             <div className="indicator">
-              <button className="btn join-item btn-success"><CiSearch className="w-6 h-6 text-white"/></button>
+              <button className="btn join-item btn-success" onClick={handleSearch}>
+                <CiSearch className="w-6 h-6 text-white"/>
+              </button>
             </div>
           </div>
         </div>
@@ -106,48 +119,51 @@ export default function Navbar() {
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
-          <Link 
-          to = "/cart">
-          <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-           1
-        </span>
-        </Link>
-        
+          <Link to="/cart">
+            <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              1
+            </span>
+          </Link>
           <a className="text-2xl p-3">
             <MdOutlineFavorite></MdOutlineFavorite>
           </a>
           <button>
-          <a className="text-2xl p-3" href="/login">
-            <MdAccountCircle></MdAccountCircle>
-          </a>
+            <a className="text-2xl p-3" href="/login">
+              <MdAccountCircle></MdAccountCircle>
+            </a>
           </button>
         </div>
       </div>
 
       {/* search bar for small screen starts */}
       <div className="flex item-center justify-center sm:hidden ">
-      <div className="join ">
-        <div>
+        <div className="join ">
           <div>
-            <input
-              className="input input-bordered join-item"
-              placeholder="Search"
-            />
+            <div>
+              <input
+                className="input input-bordered join-item"
+                placeholder="Search"
+                value={searchQuery}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+          <select className="select select-bordered join-item hidden">
+            <option disabled selected>
+              Filter
+            </option>
+            <option>Books</option>
+            <option>Decoration</option>
+            <option>Stationary</option>
+          </select>
+          <div className="indicator">
+          <CiSearch>
+            <button className="btn join-item btn-success" onClick={handleSearch}>
+            </button>
+            </CiSearch>
           </div>
         </div>
-        <select className="select select-bordered join-item hidden">
-          <option disabled selected>
-            Filter
-          </option>
-          <option>Books</option>
-          <option>Decoration</option>
-          <option>Stationary</option>
-        </select>
-        <div className="indicator">
-          <button className="btn join-item btn-success"><CiSearch></CiSearch></button>
-        </div>
-      </div>
-      <hr></hr>
+        <hr></hr>
       </div>
       {/* search bar for small screen ends */}
     </div>

@@ -116,7 +116,7 @@ export default function Cart() {
                           <p>
                             or{' '}
                             <Link
-                              to = "/"
+                              to = "/all-products"
                               type="button"
                               className="font-medium text-indigo-600 hover:text-indigo-500"
                               onClick={() => setOpen(false)}
