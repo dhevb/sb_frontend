@@ -53,7 +53,7 @@ export const counterSlice = createSlice({
         state.status = 'idle';
         state.error = action.error;
       })
-  },
+  }
 });
 
 export const selectLoggedInUser = (state)=>state.auth.loggedInUser;
