@@ -10,6 +10,7 @@ export default function Signup() {
     name: '',
     email: '',
     password: '',
+    confrim_password:'',
     role:'user'
   });
   const navigate = useNavigate();
@@ -108,6 +109,24 @@ export default function Signup() {
               {errors.password &&<span className='text-danger'>{errors.password}</span>}
             </div>
             
+
+            <div>
+              <label
+                htmlFor="confirm password"
+                className="block text-sm font-semibold text-heading"
+              >
+               Confirm Password
+              </label>
+              <input
+                id="confirm_password"
+                placeholder="re-enter password"
+                name="confirm password"
+                type="password"
+                onChange={handleInput}
+                className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+              />
+              
+            </div>
 
             <div className="flex justify-end">
           

@@ -34,12 +34,12 @@ export function checkUser(loginInfo) {
     // TODO: on server it will only return some info of user (not password)
   });
 }
-export function ForgotPassword(email) {
+export function checkUser(loginInfo) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await fetch('http://localhost:8081/auth/forgot-password', {
         method: 'POST',
-        body: JSON.stringify({ email }),
+        body: JSON.stringify(loginInfo),
         headers: { 'content-type': 'application/json' },
       });
       if (response.ok) {
@@ -50,8 +50,10 @@ export function ForgotPassword(email) {
         reject(error);
       }
     } catch (error) {
-      reject(error);
+      reject( error );
     }
+
+    // TODO: on server it will only return some info of user (not password)
   });
 }
 
