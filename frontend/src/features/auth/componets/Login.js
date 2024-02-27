@@ -1,38 +1,26 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Validation from './LoginValidation';
-import {
-  createUser,
-  checkUser,
-} from '../authAPI'; // Import the API functions
+import { useSelector, useDispatch } from 'react-redux';
+import { increment, incrementAsync, selectError, selectLoggedInUser } from '../authSlice';
+import { Link, Navigate } from 'react-router-dom';
+import { checkUserAsync } from '../authSlice';
+import { useForm } from 'react-hook-form';
 
 export default function Login() {
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-    
-  });
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
 
-  const handleInput = (data) => {
-    setValues(prev => ({ ...prev, [data.target.name]: data.target.value }));
-  };
+  const dispatch = useDispatch();
+  const error = useSelector(selectError)
+  const user = useSelector(selectLoggedInUser)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = (data) => {
-    data.preventDefault();
-    setErrors(Validation(values));
-    if (errors.email === "" && errors.password === "") {
-      checkUser(values) // Use checkUser function from authApi
-         .then((res) => {
-            navigate('/');
-          }) 
-       .catch((err) => console.log(err));
-    }
-  };
+  console.log(errors);
 
-  return (
+return (
     <div>
+      {user && <Navigate to= '/' replace={true}></Navigate>}
     <div className='bg-base-200'>
 
 <div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
@@ -54,23 +42,37 @@ export default function Login() {
         Sign up
       </Link>
     </p>
-    <form action=""onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-4">
+    <form
+    noValidate
+    className="mt-6 flex flex-col space-y-4"
+    onSubmit={handleSubmit((data) => {
+      dispatch(
+        checkUserAsync({ email: data.email, password: data.password })
+      );
+    })}
+    action='#'
+    method='POST'>
+      
         <div>
           <label
             htmlFor="email"
             className="block text-sm font-semibold text-heading"
           >
-            Email or phone
+            Email
           </label>
           <input
             id="email"
             placeholder='Type your email or phone no.'
             name="email"
             type="email"
-            onChange={handleInput}
             className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+            {...register("email", {required:"E-mail is required", 
+            pattern: {
+              value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+              message: 'email not valid',
+            },})}
           />
-          {errors.email &&<span className="text-red-500">{errors.email}</span>}
+          {errors.email &&<span className="text-red-500">{errors.email.message}</span>}
         </div>
         <div>
           <label
@@ -84,11 +86,14 @@ export default function Login() {
             name="password"
             placeholder='Type your password'
             type="password"
-            onChange={handleInput}
             className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+            {...register("password", {required:"Password is required",  
+           })}
           />
-          {errors.password &&<span className="text-red-500">{errors.password}</span>}
+          {errors.password && <span className="text-red-500">{errors.password.message}</span>}
         </div>
+
+        {error &&<span className="text-red-500">{error.message}</span>}
 
                 <div className="flex justify-end">
                   <a

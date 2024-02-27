@@ -1,37 +1,27 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import Validation from './SignupValidation';
-import {
-  createUser,
-} from '../authAPI'; // Import the API function for signup
+import { useSelector, useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
+
+import { selectLoggedInUser, createUserAsync } from '../authSlice';
+import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 export default function Signup() {
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confrim_password:'',
-    role:'user'
-  });
-  const navigate = useNavigate();
-  const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
+  const user = useSelector(selectLoggedInUser)
+  
+  const {register, 
+         handleSubmit,
+         formState: { errors }
+        } = useForm();
+  
 
-  const handleInput = (data) => {
-    setValues(prev => ({ ...prev, [data.target.name]: data.target.value }));
-  };
+  console.log(errors)
 
-  const handleSubmit = (data) => {
-    data.preventDefault();
-    setErrors(Validation(values));
-    if (errors.name === "" && errors.email === "" && errors.password === "") {
-      createUser(values) // Use createUser function from authApi
-        .then((res) => {
-          navigate('/login');
-        })
-        .catch((err) => console.log(err));
-    }
-  };
+
   return (
+    <>
+    {user && <Navigate to = "/" replace={true}></Navigate>}
     <div className='bg-base-200'>
     
     <div className="flex flex-col  justify-center pt-10 pb-14 sm:px-6 lg:px-8">
@@ -56,42 +46,40 @@ export default function Signup() {
           </Link>
         </p>
 
-        <form action="" onSubmit={handleSubmit} className="mt-6 flex flex-col space-y-4">
-        <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-sm font-semibold text-heading"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    placeholder="Type your name"
-                    name="name"
-                    type="text"
-                    onChange={handleInput}
-                    className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
-                  />
-                   {errors.name &&<span className='text-danger'>{errors.name}</span>}
-              </div>
+        <form action="" 
+              noValidate
+              onSubmit={handleSubmit((data)=>{
+                dispatch(
+                  createUserAsync({email:data.email, password:data.password})
+                  );
+                console.log(data);
+              })} 
+              className="mt-6 flex flex-col space-y-4">
+       
             <div>
               <label
                 htmlFor="email"
                 className="block text-sm font-semibold text-heading"
               >
-                Email or Phone
+                Email
               </label>
               <input
                 id="email"
                 placeholder="Type your email or phone no."
-                name="email"
-                type=""
-                onChange={handleInput}
+                {...register("email", {
+                  required:"E-mail is required", 
+                pattern: {
+                  value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                  message: 'email not valid',
+                },})}
+                type="email"
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+                
               />
-              {errors.email &&<span className='text-danger'>{errors.email}</span>}
+              {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
             </div>
             <div>
+
               <label
                 htmlFor="password"
                 className="block text-sm font-semibold text-heading"
@@ -101,12 +89,18 @@ export default function Signup() {
               <input
                 id="password"
                 placeholder="Type password"
-                name="password"
+                {...register("password", {required:"Password is required",  
+                pattern: {
+                  value:
+                    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                  message: `- at least 8 characters\n
+                  - must contain at least 1 uppercase letter, - 1 lowercase letter, and 1 number\n
+                  - Can contain special characters`,
+                },})}
                 type="password"
-                onChange={handleInput}
                 className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
               />
-              {errors.password &&<span className='text-danger'>{errors.password}</span>}
+             {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
             </div>
             
 
@@ -130,16 +124,40 @@ export default function Signup() {
 
             <div className="flex justify-end">
           
+
+            
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-semibold text-heading"
+              >
+              Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                placeholder="Type your password again."
+                {...register("confirmPassword", {required: "Confirm password is required",
+                validate : (value, formValues) => value === formValues.password || 'password not matching'
+              })}
+                type="password"
+                className="mt-2 block w-full rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 font-semibold text-heading placeholder:text-text/50 focus:border-success focus:outline-none focus:ring-0 sm:text-sm"
+              />
+              {errors.confirmPassword && <p className='text-red-500'>{errors.confirmPassword.message}</p>}
             </div>
+            
+          
 
           
            <button
               type="submit"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-success bg-success px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:border-primary-accent hover:bg-primary-accent focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:border-primary disabled:hover:bg-primary disabled:hover:text-white dark:focus:ring-white/80"
             >
-              Get OTP
+              Sign up
            
-</button>
+           </button>
+           
+           
             <button
               type="button"
               className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 text-sm font-semibold  text-text shadow-sm hover:text-heading focus:text-heading focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:text-text dark:focus:ring-white/80"
@@ -170,5 +188,6 @@ export default function Signup() {
     </div>
 
     </div>
+    </>
   );
 }
