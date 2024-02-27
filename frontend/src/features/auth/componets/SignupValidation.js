@@ -23,10 +23,12 @@ export default function Validation(values){
             error.password="Password should not be empty"
         }
         else if(!password_pattern.test(values.password)){
-            error.password="Password must contain at least one digit, one lowercase and one uppercase letter, and at least 8 characters"}
-           else {
+            error.password="Password must contain at least one digit, one lowercase and one uppercase letter, and at least 8 characters"
+        }else {
           error.password=""
        }
+       
+       
       return error;
     }
     

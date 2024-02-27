@@ -9,7 +9,8 @@ export default function Signup() {
   const [values, setValues] = useState({
     name: '',
     email: '',
-    password: ''
+    password: '',
+    role:'user'
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
