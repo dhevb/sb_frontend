@@ -24,7 +24,7 @@ import { selectLoggedInUser } from './features/auth/authSlice';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Protected><Home/></Protected>
+    element: <Home/>
   },
   {
     path: "/all-products",
