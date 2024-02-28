@@ -31,24 +31,25 @@ export async function checkUser(loginInfo) {
   });
 }
 
-export async function forgotPassword(loginInfo) {
+export async function forgotPassword(email) {
+  return new Promise(async(resolve,reject)=>{
   try {
     const response = await fetch('http://localhost:8081/auth/forgot-password', {
       method: 'POST',
-      body: JSON.stringify(loginInfo),
+      body: JSON.stringify(email),
       headers: { 'content-type': 'application/json' },
     });
     if (response.ok) {
       const data = await response.json();
-      return { data };
+      resolve ({ data });
     } else {
       const error = await response.json();
-      throw error;
+      reject( error);
     }
   } catch (error) {
-    console.error('Error resetting password:', error);
-    throw error;
+   reject(error);
   }
+  });
 }
 
 export async function signOut(userId) {

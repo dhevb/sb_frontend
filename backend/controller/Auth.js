@@ -95,7 +95,7 @@ exports.forgotPassword = async (req, res) => {
 
     // Send reset password email
     const mailOptions = {
-      from: 'EXAMPLE@gmail.com', // Replace with your sender email
+      from: 'holisticeducation052021@gmail.com', // Replace with your sender email
       to: req.body.email,
       subject: 'Password Reset',
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,

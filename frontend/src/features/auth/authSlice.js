@@ -4,7 +4,7 @@ import { checkUser, createUser } from './authAPI';
 const initialState = {
   loggedInUser: null,
   status: 'idle',
-  error:null,
+  error:null
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -21,6 +21,20 @@ export const checkUserAsync = createAsyncThunk(
   async (loginInfo,{rejectWithValue}) => {
     try{
     const response = await checkUser(loginInfo);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+  catch(error){
+    console.log(error);
+    return rejectWithValue(error);
+  }
+  }
+);
+export const forgotPasswordAsync = createAsyncThunk(
+  'user/forgotPassword',
+  async (email,{rejectWithValue}) => {
+    try{
+    const response = await forgotPasswordAsync(email);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -55,6 +69,16 @@ export const authSlice = createSlice({
         state.status = 'idle';
         state.error = action.error;
       })
+      .addCase(forgotPasswordAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(forgotPasswordAsync.fulfilled, (state) => {
+        state.status = 'idle';
+      })
+      .addCase(forgotPasswordAsync.rejected, (state, action) => {
+        state.status = 'idle';
+        state.error = action.error;
+      });
   }
 });
 
