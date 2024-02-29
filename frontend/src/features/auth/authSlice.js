@@ -32,7 +32,7 @@ export const checkUserAsync = createAsyncThunk(
 );
 export const forgotPasswordAsync = createAsyncThunk(
   'user/forgotPassword',
-  async (email,{rejectWithValue}) => {
+  async ({email},{rejectWithValue}) => {
     try{
     const response = await forgotPasswordAsync(email);
     // The value we return becomes the `fulfilled` action payload

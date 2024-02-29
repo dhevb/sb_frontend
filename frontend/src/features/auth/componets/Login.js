@@ -6,7 +6,6 @@ import {
   checkUser,
 } from '../authAPI'; // Import the API functions
 
-
 export default function Login() {
   const [values, setValues] = useState({
     email: '',

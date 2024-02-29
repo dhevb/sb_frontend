@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
-
+const randomstring=require('randomstring');
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
@@ -15,11 +15,11 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
+host: 'smtp.gmail.com',
+port:587,
   auth: {
-    user: "aa3def42862132",
-    pass: "10eee62f0e2603"
+    user: "holisticeducation052021@gmail.com",
+    pass: "girp yqus ccja ntow"
   }
 });
 
@@ -101,7 +101,7 @@ exports.forgotPassword = async (req, res) => {
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,
     };
 
-    transporter.sendMail(mailOptions, (error, info) => {
+    transporter.sendMail(mailOptions, function(error, info) {
       if (error) {
         console.error('Error sending email:', error);
         res.status(500).json({ message: 'Error sending email' });
