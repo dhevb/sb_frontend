@@ -1,5 +1,17 @@
-// A mock function to mimic making an async request for data
 export function addToCart(item) {
+  return new Promise(async (resolve) => {
+    const response = await fetch('http://localhost:8080/cart', {
+      method: 'POST',
+      body: JSON.stringify(item),
+      headers: { 'content-type': 'application/json' },
+    });
+    const data = await response.json();
+    // TODO: on server it will only return some info of user (not password)
+    resolve({ data });
+  });
+}
+
+export function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) =>{
    const response = await fetch('http://localhost:8081/cart', {
     method: 'POST',
@@ -45,4 +57,3 @@ export function deleteItemFromCart(itemId) {
     resolve({ data:{id:itemId} });
   });
 }
-

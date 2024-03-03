@@ -1,11 +1,22 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { checkUser, createUser } from './authAPI';
+import { checkUser, createUser, updateUser  } from './authAPI';
 
 const initialState = {
   loggedInUser: null,
   status: 'idle',
   error:null
 };
+
+export const updateUserAsync = createAsyncThunk(
+  'user/updateUser',
+  async (update) => {
+    const response = await updateUser(update);
+    // The value we return becomes the `fulfilled` action payload
+    return response.data;
+  }
+);
+
+
 
 export const createUserAsync = createAsyncThunk(
   'user/createUser',
