@@ -38,7 +38,9 @@ const items = useSelector(selectItems);
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>BOOKS</a>
+                <Link to = 'all-products'>
+                <a>All Products</a>
+                </Link>
               </li>
               <li>
                 <a>DECORATION</a>
@@ -95,7 +97,9 @@ const items = useSelector(selectItems);
               <option disabled selected>
                 Filter
               </option>
-              <option>Books</option>
+              <Link to = "/all-products">
+              <option>All Products</option>
+              </Link>
               <option>Decoration</option>
               <option>Stationary</option>
             </select>

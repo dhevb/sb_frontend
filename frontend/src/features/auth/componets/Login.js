@@ -50,8 +50,7 @@ return (
         checkUserAsync({ email: data.email, password: data.password })
       );
     })}
-    action='#'
-    method='POST'>
+    >
       
         <div>
           <label

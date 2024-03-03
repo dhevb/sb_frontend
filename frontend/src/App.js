@@ -14,12 +14,12 @@ import ProductListPage from './page/ProductListPage';
 import SignupPage from './page/SignupPage';
 import OTPConfirmationPage from './page/OTPConfirmationPage';
 import CartPage from './page/CartPage';
-import CheckoutPage from './page/CheckoutPage';
 import ProductDetailPage from './page/ProductDetailPage';
 import ForgotPassword from './features/auth/componets/ForgotPassword';
 import Protected from './features/auth/componets/Protected';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { selectLoggedInUser } from './features/auth/authSlice';
+import Checkout from './page/Checkout';
 
 const router = createBrowserRouter([
   {
@@ -28,11 +28,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/all-products",
-    element: <ProductListPage/>
+    element: <Protected><ProductListPage/></Protected>
   },
   {
     path: "/product-detail/:id",
-    element: <ProductDetailPage/>
+    element: <Protected><ProductDetailPage/></Protected>
   },
   {
     path: "/login",
@@ -44,16 +44,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/cart",
-    element: <CartPage/>
+    element: <Protected><CartPage/></Protected>
   },
   
   {
     path: "/checkout",
-    element:<Protected><CheckoutPage/></Protected> 
-  },
-  {
-    path: "/product-detail",
-    element: <ProductDetailPage/>
+    element:<Protected><Checkout/></Protected>
   },
   {
     path:"*",
