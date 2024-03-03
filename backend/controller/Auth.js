@@ -15,11 +15,11 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-host: 'smtp.gmail.com',
+host: process.env.HOST,
 port:587,
   auth: {
-    user: "holisticeducation052021@gmail.com",
-    pass: "girp yqus ccja ntow"
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD
   }
 });
 
@@ -31,7 +31,8 @@ exports.createUser = async (req, res) => {
     connection.release();
     
     // Generate JWT token
-    const token = jwt.sign({ id: results.insertId, role: results.role }, 'q#P6v@6nTw9u%4Z@2yG!S$e&8Lp3F@Rb');
+    const token = jwt.sign({ id: results.insertId, role: results.role }, process.env.HASH_KEY
+      );
     
     // Set token in cookie
     res.cookie('token', token, { httpOnly: true });
@@ -58,7 +59,7 @@ exports.loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password); // Compare hashed password
     if (isPasswordValid) {
       // Generate JWT token
-      const token = jwt.sign({ id: user.id, role: user.role }, '123@js5ef');
+      const token = jwt.sign({ id: user.id, role: user.role },JWT_TOKEN);
       
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });
