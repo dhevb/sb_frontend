@@ -58,7 +58,7 @@ exports.loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password); // Compare hashed password
     if (isPasswordValid) {
       // Generate JWT token
-      const token = jwt.sign({ id: user.id, role: user.role }, 'your_secret_key');
+      const token = jwt.sign({ id: user.id, role: user.role }, '123@js5ef');
       
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });

@@ -1,72 +1,57 @@
-export function createUser(userData) {
-  return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/users', {
+export  function createUser(userData) {
+  return new Promise(async(resolve)=>{
+    const response = await fetch('http://localhost:8081/auth/signup', {
       method: 'POST',
       body: JSON.stringify(userData),
       headers: { 'content-type': 'application/json' },
     });
     const data = await response.json();
-    // TODO: on server it will only return some info of user (not password)
-    resolve({ data });
-  });
+    resolve( { data });
+  } );
 }
 
-export function checkUser(loginInfo) {
-  return new Promise(async (resolve, reject) => {
-    const email = loginInfo.email;
-    const password = loginInfo.password;
-    const response = await fetch('http://localhost:8080/users?email=' + email);
-    const data = await response.json();
-    console.log({data})
-    if (data.length) {
-      if (password === data[0].password) {
-        resolve({ data: data[0] });
-      } else {
-        reject({ message: 'wrong credentials' });
-      }
-    } else {
-      reject({ message: 'user not found' });
-    }
-    // TODO: on server it will only return some info of user (not password)
-  });
-}
-export function ForgotPassword(email) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await fetch('http://localhost:8081/auth/forgot-password', {
-        method: 'POST',
-        body: JSON.stringify(email),
-        headers: { 'content-type': 'application/json' },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        resolve({ data });
-      } else {
-        const error = await response.json();
-        reject(error);
-      }
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
-
-export function updateUser(update) {
-  return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/users/'+update.id, {
-      method: 'PATCH',
-      body: JSON.stringify(update),
+export async function checkUser(loginInfo) {
+  return new Promise(async(resolve,reject)=>{
+  try {
+    const response = await fetch('http://localhost:8081/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(loginInfo),
       headers: { 'content-type': 'application/json' },
     });
-    const data = await response.json();
-    // TODO: on server it will only return some info of user (not password)
-    resolve({ data });
+    if (response.ok) {
+      const data = await response.json();
+      resolve ({ data });
+    } else {
+      const error = await response.json();
+      reject( error);
+    }
+  } catch (error) {
+   reject(error);
+  }
   });
 }
 
-export function signOut(userId) {
-  return new Promise(async (resolve) => {
-    // TODO: on server we will remove user session info
-    resolve({ data: 'success' });
-  });
+export async function forgotPassword(loginInfo) {
+  try {
+    const response = await fetch('http://localhost:8081/auth/forgot-password', {
+      method: 'POST',
+      body: JSON.stringify(loginInfo),
+      headers: { 'content-type': 'application/json' },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+    } else {
+      const error = await response.json();
+      throw error;
+    }
+  } catch (error) {
+    console.error('Error resetting password:', error);
+    throw error;
+  }
+}
+
+export async function signOut(userId) {
+  // You can implement sign out functionality if needed
+  console.log('Sign out functionality not implemented on the client side.');
 }

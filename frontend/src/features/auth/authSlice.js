@@ -4,7 +4,7 @@ import { checkUser, createUser, updateUser  } from './authAPI';
 const initialState = {
   loggedInUser: null,
   status: 'idle',
-  error:null
+  error:null,
 };
 
 export const updateUserAsync = createAsyncThunk(
@@ -29,21 +29,23 @@ export const createUserAsync = createAsyncThunk(
 
 export const checkUserAsync = createAsyncThunk(
   'user/checkUser',
-  async (loginInfo) => {
+  async (loginInfo,{rejectWithValue}) => {
+    try{
     const response = await checkUser(loginInfo);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
+  catch(error){
+    console.log(error);
+    return rejectWithValue(error);
+  }
+  }
 );
 
-export const counterSlice = createSlice({
+export const authSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(createUserAsync.pending, (state) => {
@@ -77,7 +79,7 @@ export const counterSlice = createSlice({
 export const selectLoggedInUser = (state)=>state.auth.loggedInUser;
 export const selectError = (state)=>state.auth.error;
 
-export const { increment } = counterSlice.actions;
 
 
-export default counterSlice.reducer;
+
+export default authSlice.reducer;

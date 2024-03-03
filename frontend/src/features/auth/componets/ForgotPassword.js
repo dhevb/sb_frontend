@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { forgotPassword } from '../authAPI';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -11,9 +11,9 @@ const ForgotPassword = () => {
   };
 
   const handleSubmit = async (data) => {
-    data.preventDefault();
+    data.preventDefault(); // Prevent the default form submission behavior
     try {
-      const response = await ForgotPassword(email);
+      const response = await forgotPassword(email); // Call the ForgotPassword function from authApi
       const responseData = await response.json();
       setMessage(responseData.message);
       setError('');
@@ -21,6 +21,7 @@ const ForgotPassword = () => {
       setMessage('');
       setError('Error sending email');
     }
+  
   };
 
   return (

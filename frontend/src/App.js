@@ -24,7 +24,7 @@ import Checkout from './page/Checkout';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Protected><Home/></Protected>
+    element: <Home/>
   },
   {
     path: "/all-products",
