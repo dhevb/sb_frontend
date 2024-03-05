@@ -8,11 +8,13 @@ import { addToCartAsync } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
 
 // TODO: In server data we will add colors, sizes , highlights. to each product
+
 const colors = [
   { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
   { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
   { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
 ];
+
 const sizes = [
   { name: 'XXS', inStock: false },
   { name: 'XS', inStock: true },
@@ -35,19 +37,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-// TODO : Loading UI  
+
+
 export default function ProductDetail() {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
-  const user = useSelector(selectLoggedInUser)
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
   const params = useParams();
+  const user = useSelector(selectLoggedInUser)
 
-
-  const handleCart = (e)=>{
-    e.preventDefault();
-    dispatch(addToCartAsync({...product,quantity:1,user:user.id })) 
+  const handleCart = (e) => {
+      e.preventDefault() ;
+      dispatch(addToCartAsync({...product, quantity:1, user}))
   }
 
   useEffect(() => {
@@ -294,7 +296,7 @@ export default function ProductDetail() {
                 </div>
 
                 <button
-                  onClick={handleCart}
+                  onClick = {handleCart}
                   type="submit"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >

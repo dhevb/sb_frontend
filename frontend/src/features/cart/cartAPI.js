@@ -1,6 +1,6 @@
 export function addToCart(item) {
   return new Promise(async (resolve) => {
-    const response = await fetch('http://localhost:8080/cart', {
+    const response = await fetch('http://localhost:8081/cart', {
       method: 'POST',
       body: JSON.stringify(item),
       headers: { 'content-type': 'application/json' },
@@ -13,6 +13,7 @@ export function addToCart(item) {
 
 export function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) =>{
+<<<<<<< HEAD
    const response = await fetch('http://localhost:8081/cart', {
     method: 'POST',
     body : JSON.stringify(item),
@@ -27,6 +28,10 @@ export function fetchItemsByUserId(userId) {
 export function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) => {
     const response = await fetch ('http://localhost:8081/cart?user='+ userId)
+=======
+    //TODO: we will not hard-code server URL here
+    const response = await fetch('http://localhost:8081/cart?user='+userId) 
+>>>>>>> iqra
     const data = await response.json()
     resolve({data})
   })
