@@ -15,7 +15,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (data) => {
     data.preventDefault(); // Prevent the default form submission behavior
     try {
-      const response = await forgotPassword(email); // Call the ForgotPassword function from authApi
+      const response = await ForgotPassword(email); // Call the ForgotPassword function from authApi
       const responseData = await response.json();
       setMessage(responseData.message);
       setError('');
