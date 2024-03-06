@@ -45,11 +45,10 @@ export default function ProductDetail() {
   const params = useParams();
 
 
-  const handleCart = (e)=>{
+  const handleCart = (e) => {
     e.preventDefault();
-    dispatch(addToCartAsync({...product,quantity:1,user:user.id })) 
+      dispatch(addToCartAsync({...product, quantity: 1, user}));
   }
-
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
   }, [dispatch, params.id]);

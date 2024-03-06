@@ -63,7 +63,7 @@ const items = useSelector(selectItems);
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a>BOOKS</a>
+              <a href='/all-products'>Products</a>
             </li>
             <li>
               <details>

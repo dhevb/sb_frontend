@@ -15,13 +15,32 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-host: process.env.HOST,
+host: 'smtp.gmail.com',
 port:587,
   auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD
+    user: "holisticeducation052021@gmail.com",
+    pass: "girp yqus ccja ntow"
   }
 });
+
+exports.verifyToken = (req, res, next) => {
+  // Get token from cookies or headers
+  const token = req.cookies.token || req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized: No token provided' });
+  }
+
+  // Verify token
+  jwt.verify(token, '123@js5ef', (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
+    }
+    req.userId = decoded.id; // Attach user ID to the request object for future use
+    next(); // Move to the next middleware
+  });
+};
+
 
 exports.createUser = async (req, res) => {
   try {
@@ -31,8 +50,7 @@ exports.createUser = async (req, res) => {
     connection.release();
     
     // Generate JWT token
-    const token = jwt.sign({ id: results.insertId, role: results.role }, process.env.HASH_KEY
-      );
+    const token = jwt.sign({ id: results.insertId, role: results.role }, 'q#P6v@6nTw9u%4Z@2yG!S$e&8Lp3F@Rb');
     
     // Set token in cookie
     res.cookie('token', token, { httpOnly: true });
@@ -59,7 +77,7 @@ exports.loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password); // Compare hashed password
     if (isPasswordValid) {
       // Generate JWT token
-      const token = jwt.sign({ id: user.id, role: user.role },JWT_TOKEN);
+      const token = jwt.sign({ id: user.id, role: user.role }, '123@js5ef');
       
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });
