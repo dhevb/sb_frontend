@@ -20,6 +20,10 @@ import Protected from './features/auth/componets/Protected';
 import { fetchItemsByUserIdAsync } from './features/cart/cartSlice';
 import { selectLoggedInUser } from './features/auth/authSlice';
 import Checkout from './page/Checkout';
+import OrderSuccessPage from './page/OrderSuccessPage';
+import UserOrdersPage from './page/UserOrdersPage';
+import UserProfilePage from './page/UserProfilePage';
+import AdminProductFormPage from './page/AdminProductFormPage';
 
 const router = createBrowserRouter([
   {
@@ -46,10 +50,33 @@ const router = createBrowserRouter([
     path: "/cart",
     element: <Protected><CartPage/></Protected>
   },
+  {
+    path: '/profile',
+    element: (
+      <UserProfilePage></UserProfilePage>
+    ),
+  },
   
   {
     path: "/checkout",
     element:<Protected><Checkout/></Protected>
+  },
+  {
+    path: '/order-success/:id',
+    element: (
+      <OrderSuccessPage></OrderSuccessPage>
+    ),
+  },
+  {
+    path: '/orders',
+    element: (
+      <UserOrdersPage></UserOrdersPage>
+      // we will add Page later right now using component directly.
+    ),
+  },
+  {
+    path: "add-product",
+    element: <AdminProductFormPage/>
   },
   {
     path:"*",

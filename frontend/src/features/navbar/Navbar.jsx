@@ -1,4 +1,5 @@
-import { MdAccountCircle, MdOutlineFavorite } from "react-icons/md";
+import { MdAccountCircle,} from "react-icons/md";
+import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
@@ -123,14 +124,19 @@ const items = useSelector(selectItems);
     </span>}
         </Link>
         
+        <Link to = "/orders">
+          <div className="mr-2">
           <a className="text-2xl p-3">
-            <MdOutlineFavorite></MdOutlineFavorite>
+          <MdOutlineProductionQuantityLimits />
           </a>
-          <button>
+          </div>
+        </Link>  
+
+          <Link to = '/profile'>
           <a className="text-2xl p-3" href="/login">
             <MdAccountCircle></MdAccountCircle>
           </a>
-          </button>
+          </Link>
         </div>
       </div>
 
