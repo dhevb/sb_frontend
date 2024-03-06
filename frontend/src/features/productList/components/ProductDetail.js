@@ -47,15 +47,16 @@ export default function ProductDetail() {
   const params = useParams();
   const user = useSelector(selectLoggedInUser)
 
+  useEffect(() => {
+    dispatch(fetchAllProductByIdAsync(params.id));
+  }, [dispatch, params.id]);
+
   const handleCart = (e) => {
       e.preventDefault() ;
       dispatch(addToCartAsync({...product, quantity:1, user}))
   }
 
-  useEffect(() => {
-    dispatch(fetchAllProductByIdAsync(params.id));
-  }, [dispatch, params.id]);
-
+ 
   return (
     <div className="bg-white">
       {product && (
