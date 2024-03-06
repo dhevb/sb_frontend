@@ -45,12 +45,7 @@ export default function ProductDetail() {
   const product = useSelector(selectProductById);
   const dispatch = useDispatch();
   const params = useParams();
-
-
-  const handleCart = (e)=>{
-    e.preventDefault();
-    dispatch(addToCartAsync({...product,quantity:1,user:user.id })) 
-  }
+  const user = useSelector(selectLoggedInUser)
 
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
