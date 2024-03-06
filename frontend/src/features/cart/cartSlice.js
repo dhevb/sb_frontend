@@ -8,8 +8,8 @@ const initialState = {
 
 export const addToCartAsync = createAsyncThunk(
   'cart/addToCart',
-  async (product) => {
-    const response = await addToCart(product);
+  async (item) => {
+    const response = await addToCart(item);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -17,8 +17,8 @@ export const addToCartAsync = createAsyncThunk(
 
 export const fetchItemsByUserIdAsync = createAsyncThunk(
   'cart/fetchItemsByUserId',
-  async ({user_id}) => {
-    const response = await fetchItemsByUserId(user_id);
+  async (userId) => {
+    const response = await fetchItemsByUserId(userId);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }
@@ -35,8 +35,8 @@ export const updateCartAsync = createAsyncThunk(
 
 export const deleteItemFromCartAsync = createAsyncThunk(
   'cart/deleteItemFromCart',
-  async ({product_id}) => {
-    const response = await deleteItemFromCart(product_id);
+  async (itemId) => {
+    const response = await deleteItemFromCart(itemId);
     // The value we return becomes the `fulfilled` action payload
     return response.data;
   }

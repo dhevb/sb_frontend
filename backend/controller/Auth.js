@@ -2,7 +2,7 @@ const mysql = require('mysql2/promise');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
-const randomstring=require('randomstring');
+
 const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
@@ -15,32 +15,13 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-host: 'smtp.gmail.com',
-port:587,
+  host: "sandbox.smtp.mailtrap.io",
+  port: 2525,
   auth: {
-    user: "holisticeducation052021@gmail.com",
-    pass: "girp yqus ccja ntow"
+    user: "aa3def42862132",
+    pass: "10eee62f0e2603"
   }
 });
-
-exports.verifyToken = (req, res, next) => {
-  // Get token from cookies or headers
-  const token = req.cookies.token || req.headers.authorization;
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized: No token provided' });
-  }
-
-  // Verify token
-  jwt.verify(token, '123@js5ef', (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: 'Unauthorized: Invalid token' });
-    }
-    req.userId = decoded.id; // Attach user ID to the request object for future use
-    next(); // Move to the next middleware
-  });
-};
-
 
 exports.createUser = async (req, res) => {
   try {
@@ -114,13 +95,13 @@ exports.forgotPassword = async (req, res) => {
 
     // Send reset password email
     const mailOptions = {
-      from: 'holisticeducation052021@gmail.com', // Replace with your sender email
+      from: 'EXAMPLE@gmail.com', // Replace with your sender email
       to: req.body.email,
       subject: 'Password Reset',
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,
     };
 
-    transporter.sendMail(mailOptions, function(error, info) {
+    transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
         res.status(500).json({ message: 'Error sending email' });

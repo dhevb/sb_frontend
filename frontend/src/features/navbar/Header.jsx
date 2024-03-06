@@ -31,7 +31,7 @@ export default function Header() {
         <div className="navbar-start">
           <label className=" bg-black swap swap-rotate pl-3">
             {/* this hidden checkbox controls the state */}
-            <input className="hidden" type="checkbox" />
+            <input className='hidden' type="checkbox" />
 
             {/* hamburger icon */}
             <svg
@@ -58,7 +58,7 @@ export default function Header() {
         <div className="navbar-end">
           <label className="swap swap-rotate pr-3">
             {/* this hidden checkbox controls the state */}
-            <input className="hidden"type="checkbox" onChange={handleToggle} />
+            <input className='hidden' type="checkbox" onChange={handleToggle} />
 
             {/* sun icon */}
             <svg

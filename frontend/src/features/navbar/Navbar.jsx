@@ -63,7 +63,7 @@ const items = useSelector(selectItems);
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <a href='/all-products'>Products</a>
+              <a>BOOKS</a>
             </li>
             <li>
               <details>
@@ -110,14 +110,14 @@ const items = useSelector(selectItems);
         </div>
 
         <div className="navbar-end p-1">
-
-        <Link to = "/cart">  
+        <Link 
+        to = "/cart">
           <a className="text-2xl p-3">
             <FaCartShopping></FaCartShopping>
           </a>
-      
-      
-           
+          </Link>
+      <Link 
+          to = "/cart">   
       {items.length>0 && <span className="inline-flex items-center rounded-md bg-green-50 py-1 px-2 -ml-4 mb-6 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
       {items.length}
     </span>}
