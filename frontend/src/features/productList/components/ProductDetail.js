@@ -4,9 +4,9 @@ import { RadioGroup } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProductByIdAsync, selectProductById } from '../productSlice';
 import { useParams } from 'react-router-dom';
-import { addToCartAsync } from '../../cart/cartSlice';
+import { addToCartAsync,selectItems } from '../../cart/cartSlice';
 import { selectLoggedInUser } from '../../auth/authSlice';
-
+import { toast } from 'react-toastify';
 // TODO: In server data we will add colors, sizes , highlights. to each product
 
 const colors = [
@@ -46,16 +46,31 @@ export default function ProductDetail() {
   const dispatch = useDispatch();
   const params = useParams();
   const user = useSelector(selectLoggedInUser)
+  const items = useSelector(selectItems);
+  
+
+  const handleCart = (e) => {
+    e.preventDefault();
+    if (items.findIndex((item) => item.product.id === product.id) < 0) {
+      console.log({ items, product });
+      const newItem = {
+        product: product.id,
+        quantity: 1,
+        user:user.id
+        
+      };
+      dispatch(addToCartAsync(newItem));
+      toast.success('Item added to Cart');
+    } else {
+      toast.error('Item Already added');
+    }
+  };
+  
+  
 
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
   }, [dispatch, params.id]);
-
-  const handleCart = (e) => {
-      e.preventDefault() ;
-      dispatch(addToCartAsync({...product, quantity:1, user}))
-  }
-
  
   return (
     <div className="bg-white">
