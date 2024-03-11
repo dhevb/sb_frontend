@@ -1,5 +1,12 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import book1 from "../../assets/book1.jpg"
+import book2 from "../../assets/book2.jpg"
+import book3 from "../../assets/book3.jpg"
+import cycle1 from "../../assets/cycle1.jpg"
+import cycle2 from "../../assets/cycle2.jpg"
+import diye1 from "../../assets/diya1.jpg"
+import diye2 from "../../assets/diya2.jpg"
 
 import React from "react";
 
@@ -34,19 +41,19 @@ export default function DealandOffers() {
         <h1 className="text-xl font-bold py-4">DEALS & OFFERS</h1>
         <Carousel responsive={responsive}>
             {/* first card */}
-          <div>
+          <div className="mb-4">
             <div className="card w-64 bg-base-200  rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src={book1}
+                  alt="book"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
-                  UP TO 30% OFF
+                  UP TO 10% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on Books.</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>
@@ -58,15 +65,15 @@ export default function DealandOffers() {
             <div className="card w-64 bg-base-200  rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src= {cycle2}
+                  alt="cycle"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
-                  UP TO 30% OFF
+                  UP TO 20% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on E-Cycle.</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>
@@ -79,15 +86,15 @@ export default function DealandOffers() {
             <div className="card w-64 bg-base-200 rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src={cycle1}
+                  alt="cycle"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
                   UP TO 30% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on E-Cycle.</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>
@@ -100,15 +107,15 @@ export default function DealandOffers() {
             <div className="card w-64 bg-base-200 rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src={book3}
+                  alt="book"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
                   UP TO 30% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on Books</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>
@@ -121,15 +128,15 @@ export default function DealandOffers() {
             <div className="card w-64 bg-base-200 rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src={book2}
+                  alt="book"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
-                  UP TO 30% OFF
+                  UP TO 35% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on Books</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>
@@ -142,15 +149,15 @@ export default function DealandOffers() {
             <div className="card w-64 bg-base-200 rounded shadow-xl">
               <figure>
                 <img
-                  src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-                  alt="Shoes"
+                  src={book3}
+                  alt="book"
                 />
               </figure>
               <div className="card-body">
                 <h2 className="card-title justify-center">
-                  UP TO 30% OFF
+                  UP TO 25% OFF
                 </h2>
-                <p className="text-sm text-center">Save extra on Herbal Products.</p>
+                <p className="text-sm text-center">Save extra on Books.</p>
                 <div className="card-actions justify-center">
                   <div className="badge badge-outline p-4">Products</div>
                 </div>

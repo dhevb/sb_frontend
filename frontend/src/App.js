@@ -24,6 +24,7 @@ import OrderSuccessPage from './page/OrderSuccessPage';
 import UserOrdersPage from './page/UserOrdersPage';
 import UserProfilePage from './page/UserProfilePage';
 import AdminProductFormPage from './page/AdminProductFormPage';
+import AboutUsPage from './page/AboutUsPage';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
   {
     path: "add-product",
     element: <AdminProductFormPage/>
+  },
+  {
+    path: "about-us",
+    element: <AboutUsPage/>
   },
   {
     path:"*",
