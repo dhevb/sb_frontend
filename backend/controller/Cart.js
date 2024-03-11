@@ -1,3 +1,4 @@
+const { log } = require('console');
 const mysql = require('mysql2/promise');
 
 const pool = mysql.createPool({
@@ -13,8 +14,9 @@ const pool = mysql.createPool({
 exports.fetchCartByUser = async (req, res) => {
   const { user } = req.query;
   try {
+    console.log(req.query);
     const connection = await pool.getConnection();
-    const [results, fields] = await connection.execute('SELECT * FROM carts WHERE user_id = ?', [user]);
+    const [results, fields] = await connection.execute('SELECT * FROM carts WHERE user_id = ?', [req.query.users]);
     connection.release();
     res.status(200).json(results);
   } catch (err) {
@@ -26,7 +28,8 @@ exports.fetchCartByUser = async (req, res) => {
 exports.addToCart = async (req, res) => {
   try {
     const connection = await pool.getConnection();
-    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id) VALUES (?, ?, ?)', [req.body.quantity, req.body.product, req.body.user]);
+    console.log(JSON.stringify(req.body));
+    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id) VALUES (?, ?, ?)', [req.body.quantity, req.body.product_id, req.body.user_id]);
     connection.release();
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (err) {
@@ -50,9 +53,10 @@ exports.deleteFromCart = async (req, res) => {
 
 exports.updateCart = async (req, res) => {
   const { id } = req.params;
+  console.log(req);
   try {
     const connection = await pool.getConnection();
-    await connection.execute('UPDATE carts SET quantity = ?, product_id = ?, user_id = ? WHERE id = ?', [req.body.quantity, req.body.product, req.body.user, id]);
+    await connection.execute('UPDATE carts SET quantity = ?, product_id = ?, user_id = ? WHERE id = ?', [req.body.quantity, req.body.product, req.body.user_id,id]);
     connection.release();
     res.status(200).json({ id, ...req.body });
   } catch (err) {

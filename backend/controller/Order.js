@@ -1,4 +1,5 @@
 const mysql = require('mysql2/promise');
+const { loginUser } = require('./Auth');
 
 const pool = mysql.createPool({
   host: 'localhost',
@@ -24,9 +25,10 @@ exports.fetchOrdersByUser = async (req, res) => {
 };
 
 exports.createOrder = async (req, res) => {
+  console.log(req);
   try {
     const connection = await pool.getConnection();
-    const [result, fields] = await connection.execute('INSERT INTO orders (items, totalAmount, totalItems, user_id, paymentMethod, status, selectedAddress) VALUES (?, ?, ?, ?, ?, ?, ?)', [JSON.stringify(req.body.items), req.body.totalAmount, req.body.totalItems, req.body.user, req.body.paymentMethod, req.body.status, JSON.stringify(req.body.selectedAddress)]);
+    const [result, fields] = await connection.execute('INSERT INTO orders (items, totalAmount, totalItems, user_id, paymentMethod, status, selectedAddress) VALUES (?, ?, ?, ?, ?, ?, ?)', [JSON.stringify(req.body.items), req.body.totalAmount, req.body.totalItems, req.body.user_id, req.body.paymentMethod, req.body.status, JSON.stringify(req.body.selectedAddress)]);
     connection.release();
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (err) {
@@ -52,7 +54,7 @@ exports.updateOrder = async (req, res) => {
   const { id } = req.params;
   try {
     const connection = await pool.getConnection();
-    await connection.execute('UPDATE orders SET items = ?, totalAmount = ?, totalItems = ?, user_id = ?, paymentMethod = ?, status = ?, selectedAddress = ? WHERE id = ?', [JSON.stringify(req.body.items), req.body.totalAmount, req.body.totalItems, req.body.user, req.body.paymentMethod, req.body.status, JSON.stringify(req.body.selectedAddress), id]);
+    await connection.execute('UPDATE orders SET items = ?, totalAmount = ?, totalItems = ?, user_id = ?, paymentMethod = ?, status = ?, selectedAddress = ? WHERE id = ?', [JSON.stringify(req.body.items), req.body.totalAmount, req.body.totalItems, req.body.user_id, req.body.paymentMethod, req.body.status, JSON.stringify(req.body.selectedAddress), id]);
     connection.release();
     res.status(200).json({ id, ...req.body });
   } catch (err) {
