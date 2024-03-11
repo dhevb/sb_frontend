@@ -15,11 +15,11 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-  host: "sandbox.smtp.mailtrap.io",
-  port: 2525,
+  host: "smtp.gmail.com",
+  port: 578,
   auth: {
-    user: "aa3def42862132",
-    pass: "10eee62f0e2603"
+    user: "holisticeducation052021@gmail.com",
+    pass: "girp yqus ccja ntow"
   }
 });
 
@@ -44,6 +44,7 @@ exports.createUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+  console.log(req);
   try {
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [req.body.email]);
@@ -63,7 +64,7 @@ exports.loginUser = async (req, res) => {
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });
       
-      res.status(200).json({ id: user.id, role: user.role });
+      res.status(200).json({ id: user.id, role: user.role , token: token});
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -74,6 +75,7 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.forgotPassword = async (req, res) => {
+  console.log(req.body);
   try {
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [req.body.email]);
@@ -86,16 +88,16 @@ exports.forgotPassword = async (req, res) => {
 
     const user = results[0];
 
-    // Generate a random temporary password
+    
     const tempPassword = Math.random().toString(36).slice(-8);
 
-    // Update user's hashed password in the database
+    
     const hashedTempPassword = await bcrypt.hash(tempPassword, 10);
     await connection.execute('UPDATE users SET password = ? WHERE id = ?', [hashedTempPassword, user.id]);
 
-    // Send reset password email
+    
     const mailOptions = {
-      from: 'EXAMPLE@gmail.com', // Replace with your sender email
+      from: 'holisticeducation052021@gmail.com', 
       to: req.body.email,
       subject: 'Password Reset',
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,

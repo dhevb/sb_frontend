@@ -38,7 +38,7 @@ export const checkUserAsync = createAsyncThunk(
 );
 
 export const counterSlice = createSlice({
-  name: 'user',
+  name: 'users',
   initialState,
   reducers: {
     increment: (state) => {
