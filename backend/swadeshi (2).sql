@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2024 at 07:25 AM
+-- Generation Time: Mar 13, 2024 at 11:28 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,6 +46,15 @@ CREATE TABLE `carts` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `quantity`, `product_id`, `user_id`) VALUES
+(12, 1, 1, 12),
+(13, 3, 1, 12),
+(14, 3, 1, 12);
+
 -- --------------------------------------------------------
 
 --
@@ -57,6 +66,30 @@ CREATE TABLE `categories` (
   `label` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`items`)),
+  `totalAmount` decimal(10,2) DEFAULT NULL,
+  `totalItems` int(11) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `paymentMethod` varchar(255) NOT NULL,
+  `status` varchar(255) DEFAULT 'pending',
+  `selectedAddress` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`selectedAddress`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `items`, `totalAmount`, `totalItems`, `user_id`, `paymentMethod`, `status`, `selectedAddress`) VALUES
+(1, '\"shoes\"', NULL, NULL, NULL, 'none', 'pending', '\"mohali\"');
 
 -- --------------------------------------------------------
 
@@ -79,6 +112,13 @@ CREATE TABLE `products` (
   `deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `title`, `description`, `price`, `discountPercentage`, `rating`, `stock`, `brand`, `category`, `thumbnail`, `images`, `deleted`) VALUES
+(1, 'nike air jordan', 'best quality sneakers', 15000.00, 10, 5.0, 100, 'nike', 'shoes', 'jordan 11', '', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -100,7 +140,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `role`, `name`, `addresses`, `orders`) VALUES
-(1, 'sonal@gmail.com', 'Sonal123', 'user', NULL, NULL, NULL);
+(12, 'kandarisonal21200@gmail.com', '$2b$10$tLN53.8g0iNglZM2keptdelBlSV7gn/5i1OFW4HOn5WTsuxuwFR6C', 'user', NULL, NULL, NULL),
+(13, 'sonal12212001@gmail.com', '$2b$10$6.JcXB6imVDJQVFoMw..G..DACqHkvb1RY47QmUExMxLwePA4GIHe', 'user', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -131,6 +172,13 @@ ALTER TABLE `categories`
   ADD UNIQUE KEY `value` (`value`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -158,7 +206,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -167,16 +215,22 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
@@ -188,6 +242,12 @@ ALTER TABLE `users`
 ALTER TABLE `carts`
   ADD CONSTRAINT `carts_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `carts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

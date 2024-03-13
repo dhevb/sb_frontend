@@ -141,7 +141,7 @@ const items = useSelector(selectItems);
           </div>
         </Link>  
 
-          <Link to = '/profile'>
+          <Link to = '/login'>
           <a className="text-2xl p-3 hover:text-orange-400" href="/login">
             <MdAccountCircle></MdAccountCircle>
           </a>
