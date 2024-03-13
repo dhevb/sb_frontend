@@ -35,7 +35,7 @@ export default function Header() {
 
             {/* hamburger icon */}
             <svg
-              className="swap-off fill-current w-6 h-6"
+              className="swap-off fill-current w-6 h-6 text-success"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
             >
@@ -44,7 +44,7 @@ export default function Header() {
 
             {/* close icon */}
             <svg
-              className="swap-on fill-current w-6 h-6"
+              className="swap-on fill-current w-6 h-6 text-orange-400"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
             >
@@ -53,7 +53,7 @@ export default function Header() {
           </label>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost text-md">Swadeshi Bazaar</a>
+          <a className="btn btn-ghost italic text-orange-400 text-md">True Indian Buys Indian</a>
         </div>
         <div className="navbar-end">
           <label className="swap swap-rotate pr-3">
@@ -62,7 +62,7 @@ export default function Header() {
 
             {/* sun icon */}
             <svg
-              className="swap-on fill-current w-6 h-6"
+              className="swap-on fill-current w-6 h-6  text-orange-400"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >
@@ -71,7 +71,7 @@ export default function Header() {
 
             {/* moon icon */}
             <svg
-              className="swap-off fill-current w-6 h-6"
+              className="swap-off fill-current w-6 h-6 text-success"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
             >

@@ -1,63 +1,71 @@
 import React from 'react'
+import book1 from "../../assets/book1.jpg"
+import book2 from "../../assets/book2.jpg"
+import book3 from "../../assets/book3.jpg"
+import cycle1 from "../../assets/cycle1.jpg"
+import cycle2 from "../../assets/cycle2.jpg"
+import diye1 from "../../assets/diya1.jpg"
+import diye2 from "../../assets/diya2.jpg"
 
 export default function ShopByCategories() {
 
     const products = [
         {
           id: 1,
-          name: 'Earthen Bottle',
+          name: 'E-cycle',
           href: '#',
           offer: '20 - 30% OFF',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg',
-          imageAlt: 'Tall slender porcelain bottle with natural clay textured body and cork stopper.',
+          imageSrc: cycle1,
+          imageAlt: 'e-cycle',
         },
         {
           id: 2,
-          name: 'Nomad Tumbler',
+          name: 'book',
           href: '#',
           offer: '20 - 30% OFF',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg',
-          imageAlt: 'Olive drab green insulated bottle with flared screw lid and flat top.',
+          imageSrc: book3,
+          imageAlt: 'book',
         },
         {
           id: 3,
-          name: 'Focus Paper Refill',
+          name: 'Godhan Diye',
           href: '#',
           offer: '20 - 30% OFF',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg',
+          imageSrc: diye1,
           imageAlt: 'Person using a pen to cross a task off a productivity paper card.',
         },
+
         {
-          id: 4,
-          name: 'Machined Mechanical',
-          href: '#',
-          offer: '20 - 30% OFF',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-          imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-        },
-        {
-            id: 5,
-            name: 'Machined Mechanical',
+            id: 4,
+            name: 'Godhan Diye',
             href: '#',
             offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+            imageSrc: diye2,
+            imageAlt: 'diya',
+          },
+          {
+            id: 5,
+            name: 'Start-up Books',
+            href: '#',
+            offer: '20 - 30% OFF',
+            imageSrc: book1,
+            imageAlt: 'Book',
           },
           {
             id: 6,
-            name: 'Machined Mechanical',
+            name: 'E-cycle',
             href: '#',
             offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+            imageSrc: cycle2,
+            imageAlt: 'cycle',
           },
           {
             id: 7,
-            name: 'Machined Mechanical',
+            name: 'Academic Books',
             href: '#',
             offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+            imageSrc: book2,
+            imageAlt: 'book',
           },
           {
             id: 8,
@@ -69,46 +77,31 @@ export default function ShopByCategories() {
           },
           {
             id: 9,
-            name: 'Machined Mechanical',
+            name: 'Book',
             href: '#',
             offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+            imageSrc: book3,
+            imageAlt: 'book3',
           },
           {
             id: 10,
-            name: 'Machined Mechanical',
+            name: 'Academic Books',
             href: '#',
             offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
+            imageSrc: book2,
+            imageAlt: 'book',
           },
-          {
-            id: 11,
-            name: 'Machined Mechanical',
-            href: '#',
-            offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-          },
-          {
-            id: 12,
-            name: 'Machined Mechanical',
-            href: '#',
-            offer: '20 - 30% OFF',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg',
-            imageAlt: 'Hand holding black machined steel mechanical pencil with brass tip and top.',
-          },
+
         // More products...
       ]
 
   return (
-    <div>
-    <h1 className="text-xl font-bold ml-12 py-4">SHOP BY CATEGORIES</h1>
+    <div className='bg-base-200 py-1'>
+    <h1 className="text-xl mt-20  text-center font-bold ml-12 py-4">SHOP BY CATEGORIES</h1>
 
-    <div className="bg-base-200 mx-12 rounded">
+    <div className=" mx-12 rounded">
       
-    <div className="mx-auto max-w-2xl px-2 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <div className="mx-auto max-w-2xl px-2 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8">
 
       <h2 className="sr-only">Products</h2>
 

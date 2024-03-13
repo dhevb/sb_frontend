@@ -5,6 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
 import { useSelector } from "react-redux";
 import { selectItems } from "../cart/cartSlice";
+import logo from "../../assets/logo.png"
 
 
 export default function Navbar() {
@@ -13,7 +14,6 @@ const items = useSelector(selectItems);
 
   return (
     <div>
-
       {/* navbar */}
       <div className="navbar bg-base-100">
         <div className="navbar-start">
@@ -55,16 +55,22 @@ const items = useSelector(selectItems);
                 </ul>
               </li>
               <li>
-                <a>STATIONARY</a>
+              <Link to = 'about-us'>
+                <a>About us</a>
+                </Link>
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Logo</a>
+          <Link to = "/">
+          <div className="w-24 h-24 pl-4">
+           <img src={logo} alt="logo" />
+          </div>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 z-10">
             <li>
-              <a>BOOKS</a>
+              <a>All Products</a>
             </li>
             <li>
               <details>
@@ -80,7 +86,9 @@ const items = useSelector(selectItems);
               </details>
             </li>
             <li>
-              <a>STATIONARY</a>
+            <Link to = 'about-us'>
+                <a>About us</a>
+                </Link>
             </li>
           </ul>
         </div>
@@ -110,10 +118,11 @@ const items = useSelector(selectItems);
           </div>
         </div>
 
-        <div className="navbar-end p-1">
+        <div className="navbar-end pr-6">
+          <div className="flex sm:bg-base-200 bg-none px-2 md:px-6 rounded-lg">
         <Link 
         to = "/cart">
-          <a className="text-2xl p-3">
+          <a className="text-2xl p-3 hover:text-orange-400">
             <FaCartShopping></FaCartShopping>
           </a>
           </Link>
@@ -125,23 +134,24 @@ const items = useSelector(selectItems);
         </Link>
         
         <Link to = "/orders">
-          <div className="mr-2">
-          <a className="text-2xl p-3">
+          <div className="mx-4">
+          <a className="text-2xl p-3 hover:text-orange-400">
           <MdOutlineProductionQuantityLimits />
           </a>
           </div>
         </Link>  
 
           <Link to = '/profile'>
-          <a className="text-2xl p-3" href="/login">
+          <a className="text-2xl p-3 hover:text-orange-400" href="/login">
             <MdAccountCircle></MdAccountCircle>
           </a>
           </Link>
         </div>
       </div>
+      </div>
 
       {/* search bar for small screen starts */}
-      <div className="flex item-center justify-center sm:hidden ">
+      <div className="flex item-center justify-center  sm:hidden ">
       <div className="join ">
         <div>
           <div>
@@ -157,7 +167,7 @@ const items = useSelector(selectItems);
           </option>
           <option>Books</option>
           <option>Decoration</option>
-          <option>Stationary</option>
+          <option>About us</option>
         </select>
         <div className="indicator">
           <button className="btn join-item btn-success"><CiSearch></CiSearch></button>

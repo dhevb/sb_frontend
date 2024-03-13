@@ -8,6 +8,7 @@ import CategoriesSlides from '../features/hero/CategoriesSlides';
 import Carousel from '../features/hero/Carousel';
 import DealandOffers from '../features/hero/DealandOffers'
 import ShopByCategories from '../features/hero/ShopByCategories'
+import Feature from '../features/hero/Feature';
 export default function Home() {
 
    
@@ -20,13 +21,17 @@ export default function Home() {
         <CategoriesSlides/>
         <Carousel/>
 
-        <div className='mx-6 p-6 '>
+        <div className='mx-6 p-6'>
         <DealandOffers/>
         </div>
+        
+        <Feature/>
         <ShopByCategories/>
         <FooterTop/>
         <Footer/>
         <FooterBottom/>
+
+        
     </div>
   )
 }

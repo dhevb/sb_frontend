@@ -5,7 +5,7 @@ export default function Footer() {
     <div>
   
 
-<footer className="footer p-10 bg-base-200 text-base-content">
+<footer className="footer p-10 bg-base-100 text-base-content">
 
 <form>
     <h6 className="footer-title">Newsletter</h6> 
@@ -40,18 +40,7 @@ export default function Footer() {
     <a className="link link-hover">Privacy policy</a>
     <a className="link link-hover">Cookie policy</a>
   </nav> 
-  <nav>
-    <h6 className="footer-title">Legal</h6> 
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
-  </nav> 
-  <nav>
-    <h6 className="footer-title">Legal</h6> 
-    <a className="link link-hover">Terms of use</a>
-    <a className="link link-hover">Privacy policy</a>
-    <a className="link link-hover">Cookie policy</a>
-  </nav> 
+
 
  
 </footer>
