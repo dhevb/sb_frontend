@@ -8,16 +8,16 @@ import { FaLinkedin } from "react-icons/fa";
 export default function FooterBottom() {
   return (
     <div>     
-<footer className="footer items-center bg-black p-2 text-neutral-500">
+<footer className="footer items-center bg-black py-2 md:px-20 px-6 text-neutral-500">
   <aside className="items-center grid-flow-col">
     <p>Copyright © 2024 - All right reserved by swadeshibazaar.com</p>
   </aside> 
   <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    <FaFacebook/>
-    <FaInstagram />
-    <IoLogoYoutube />
-    <FaTwitter />
-    <FaLinkedin />
+    <FaFacebook className='hover:text-success'/>
+    <FaInstagram className='hover:text-success'/>
+    <IoLogoYoutube className='hover:text-success'/>
+    <FaTwitter className='hover:text-success'/>
+    <FaLinkedin className='hover:text-success'/>
   </nav>
  </footer>
 </div>

@@ -15,7 +15,7 @@ export default function Feature() {
             <TiTickOutline className="w-6 h-6"/>
         </div>
         <h3 className="text-xl font-bold">Free Selling Platform</h3>
-        <p className='text-md'>swadeshibazaar.co.in provides a free and accessible platform for sellers to showcase and sell their Swadeshi products, eliminating the barriers faced by street vendors.
+        <p className='text-sm'>swadeshibazaar.co.in provides a free and accessible platform for sellers to showcase and sell their Swadeshi products, eliminating the barriers faced by street vendors.
 </p>
     </div>
     <div className="grid gap-4 justify-items-center text-center md:flex-1">
@@ -23,7 +23,7 @@ export default function Feature() {
         <FaBookOpen className="w-6 h-6"/>
         </div>
         <h3 className="text-xl font-bold">Swadeshi Books</h3>
-        <p className='text-md' > A special focus on Swadeshi books, including Vidya Bharti publications, promotes indigenous literature, education, and knowledge dissemination.
+        <p className='text-sm' > A special focus on Swadeshi books, including Vidya Bharti publications, promotes indigenous literature, education, and knowledge dissemination.
 </p>
     </div>
     <div className="grid gap-4 justify-items-center text-center md:flex-1">
@@ -32,7 +32,7 @@ export default function Feature() {
               
         </div>
         <h3 className="text-xl font-bold">Artisans and Entrepreneurs</h3>
-        <p className='text-md'>The platform aims to support local artisans and entrepreneurs by providing them with a digital storefront to expand their reach and connect with a broader customer base.
+        <p className='text-sm'>The platform aims to support local artisans and entrepreneurs by providing them with a digital storefront to expand their reach and connect with a broader customer base.
 </p>
     </div>
 </div>

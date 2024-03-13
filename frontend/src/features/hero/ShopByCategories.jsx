@@ -91,21 +91,36 @@ export default function ShopByCategories() {
             imageSrc: book2,
             imageAlt: 'book',
           },
+          {
+            id: 11,
+            name: 'Book',
+            href: '#',
+            offer: '20 - 30% OFF',
+            imageSrc: book3,
+            imageAlt: 'book3',
+          },
+          {
+            id: 12,
+            name: 'Academic Books',
+            href: '#',
+            offer: '20 - 30% OFF',
+            imageSrc: book2,
+            imageAlt: 'book',
+          }
 
         // More products...
       ]
 
   return (
-    <div className='bg-base-200 py-1'>
-    <h1 className="text-xl mt-20  text-center font-bold ml-12 py-4">SHOP BY CATEGORIES</h1>
+    <div className='bg-base-200 my-6 mx-6'>
+    <h1 className="text-xl py-4 text-center font-bold">SHOP BY CATEGORIES</h1>
 
-    <div className=" mx-12 rounded">
+    <div className="rounded">
       
-    <div className="mx-auto max-w-2xl px-2 py-12 sm:px-6 sm:py-20 lg:max-w-7xl lg:px-8">
+    <div className="mx-auto max-w-2xl px-0 py-12 sm:px-0 sm:py-16 lg:max-w-full lg:px-8">
 
-      <h2 className="sr-only">Products</h2>
 
-      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-x-8">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 xl:gap-x-8">
         {products.map((product) => (
           <a key={product.id} href={product.href} className="group">
             <div className='bg-base-100 p-2 rounded-lg'>

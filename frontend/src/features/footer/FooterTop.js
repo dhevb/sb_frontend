@@ -14,7 +14,7 @@ import tudu from "../../assets/tudulogo.png"
 export default function FooterTop() {
   return (
 
-      <div className="flex items-center justify-between   border-t-2 border-base-100  bg-base-300 text-center  py-4 px-20 ">
+      <div className="flex items-center justify-between border-b-2   bg-base-100 text-center  py-4 px-20 ">
       {/* logos */}
       {/* dhe */}
         

@@ -310,7 +310,7 @@ function MobileFilter({
                                   onChange={(e) =>
                                     handleFilter(e, section, option)
                                   }
-                                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                  className="h-4 w-4 rounded border-gray-300 text-success focus:ring-green-500"
                                 />
                                 <label
                                   htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
@@ -371,7 +371,7 @@ function DesktopFilter({ handleFilter, filters }) {
                         type="checkbox"
                         defaultChecked={option.checked}
                         onChange={(e) => handleFilter(e, section, option)}
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded border-gray-300 text-success focus:ring-green-500"
                       />
                       <label
                         htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -437,7 +437,7 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
             </div>
-            {/* Current: "z-10 bg-indigo-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
+            {/* Current: "z-10 bg-success text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" */}
 
             {Array.from({ length: totalPages }).map((el, index) => (
               <div
@@ -445,9 +445,9 @@ function Pagination({ page, setPage, handlePage, totalItems }) {
                 aria-current="page"
                 className={`relative cursor-pointer z-10 inline-flex items-center ${
                   index + 1 === page
-                    ? 'bg-indigo-600 text-white'
+                    ? 'bg-success text-white'
                     : 'text-gray-400'
-                } px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                } px-4 py-2 text-sm font-semibold  focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success`}
               >
                 {index + 1}
               </div>

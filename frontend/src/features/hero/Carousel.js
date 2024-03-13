@@ -39,7 +39,7 @@ export default function Carousel() {
         <div>
           <img className="w-full h-80"    src="https://as1.ftcdn.net/v2/jpg/02/66/40/40/1000_F_266404077_U620rNn9gWl7wZ6JT2QG0nSg6k8Xdwfy.jpg"></img>
         </div>
-      </MultiCarousel>;
+      </MultiCarousel>
     </div>
   )
 }
