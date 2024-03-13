@@ -122,7 +122,7 @@ function Checkout() {
                             required: 'name is required',
                           })}
                           id="name"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.name && (
                           <p className="text-red-500">{errors.name.message}</p>
@@ -144,7 +144,7 @@ function Checkout() {
                             required: 'email is required',
                           })}
                           type="email"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.email && (
                           <p className="text-red-500">{errors.email.message}</p>
@@ -166,7 +166,7 @@ function Checkout() {
                             required: 'phone is required',
                           })}
                           type="tel"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.phone && (
                           <p className="text-red-500">{errors.phone.message}</p>
@@ -188,7 +188,7 @@ function Checkout() {
                             required: 'street is required',
                           })}
                           id="street"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.street && (
                           <p className="text-red-500">
@@ -213,7 +213,7 @@ function Checkout() {
                           })}
                           id="city"
                           autoComplete="address-level2"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.city && (
                           <p className="text-red-500">{errors.city.message}</p>
@@ -236,7 +236,7 @@ function Checkout() {
                           })}
                           id="state"
                           autoComplete="address-level1"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.state && (
                           <p className="text-red-500">{errors.state.message}</p>
@@ -258,7 +258,7 @@ function Checkout() {
                             required: 'pinCode is required',
                           })}
                           id="pinCode"
-                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-success sm:text-sm sm:leading-6"
                         />
                         {errors.pinCode && (
                           <p className="text-red-500">
@@ -280,7 +280,7 @@ function Checkout() {
                   </button>
                   <button
                     type="submit"
-                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="rounded-md bg-success px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-success"
                   >
                     Add Address
                   </button>
@@ -306,7 +306,7 @@ function Checkout() {
                         name="address"
                         type="radio"
                         value={index}
-                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        className="h-4 w-4 border-gray-300 text-success focus:ring-success"
                       />
                       <div className="min-w-0 flex-auto">
                         <p className="text-sm font-semibold leading-6 text-gray-900">
@@ -349,7 +349,7 @@ function Checkout() {
                         value="cash"
                         type="radio"
                         checked={paymentMethod === 'cash'}
-                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        className="h-4 w-4 border-gray-300 text-success focus:ring-success"
                       />
                       <label
                         htmlFor="cash"
@@ -366,7 +366,7 @@ function Checkout() {
                         checked={paymentMethod === 'card'}
                         value="card"
                         type="radio"
-                        className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                        className="h-4 w-4 border-gray-300 text-success focus:ring-success"
                       />
                       <label
                         htmlFor="card"
@@ -434,7 +434,7 @@ function Checkout() {
                               <button
                                 onClick={(e) => handleRemove(e, item.id)}
                                 type="button"
-                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                                className="font-medium text-success hover:text-green-500"
                               >
                                 Remove
                               </button>
@@ -462,7 +462,7 @@ function Checkout() {
                 <div className="mt-6">
                   <div
                     onClick={handleOrder}
-                    className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    className="flex cursor-pointer items-center justify-center rounded-md border border-transparent bg-success px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-green-600"
                   >
                     Order Now
                   </div>
@@ -473,7 +473,7 @@ function Checkout() {
                     <Link to="/">
                       <button
                         type="button"
-                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                        className="font-medium text-success hover:text-green-500"
                       >
                         Continue Shopping
                         <span aria-hidden="true"> &rarr;</span>
