@@ -44,7 +44,6 @@ exports.createUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
-  console.log(req);
   try {
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM users WHERE email = ?', [req.body.email]);

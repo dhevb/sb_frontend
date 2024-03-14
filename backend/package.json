@@ -22,7 +22,7 @@
     "lru-cache": "^10.2.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.2",
-    "nodemailer": "^6.9.10",
+    "nodemailer": "^6.9.12",
     "nodemon": "^3.0.3",
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0"
