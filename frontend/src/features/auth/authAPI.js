@@ -57,3 +57,7 @@ export async function signOut(userId) {
   // You can implement sign out functionality if needed
   console.log('Sign out functionality not implemented on the client side.');
 }
+
+export function googleLogin() {
+  window.location.href = 'http://localhost:8081/auth/google'; // Replace with your backend's Google OAuth login route
+}

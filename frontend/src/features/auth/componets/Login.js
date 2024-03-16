@@ -30,6 +30,10 @@ export default function Login() {
        .catch((err) => console.log(err));
     }
   };
+   const handleGoogleLogin = () => {
+    window.location.href = 'http://localhost:8081/auth/google'; // Replace with your backend's Google OAuth login route
+  };
+
 
   return (
     <div>
@@ -106,8 +110,9 @@ export default function Login() {
                   Login
                 </button>
 
-                <button
+                <button 
                   type="button"
+                  onClick={handleGoogleLogin}
                   className="inline-flex cursor-pointer items-center justify-center rounded-xl border-2 border-muted-3 bg-transparent px-4 py-2.5 text-sm font-semibold  text-text shadow-sm hover:text-heading focus:text-heading focus:outline-none focus:ring-2 focus:ring-orange-400/80 focus:ring-offset-0 disabled:opacity-30 disabled:hover:text-text dark:focus:ring-white/80"
                 >
                   <svg viewBox="0 0 48 48" className="mr-2 h-5 w-5">

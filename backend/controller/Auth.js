@@ -2,6 +2,8 @@ const mysql = require('mysql2/promise');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const pool = mysql.createPool({
   host: 'localhost',
@@ -115,4 +117,50 @@ exports.forgotPassword = async (req, res) => {
     console.error('Error resetting password:', err);
     res.status(400).json({ message: 'Error resetting password' });
   }
+};
+
+passport.use(new GoogleStrategy({
+  clientID: '922589496437-8rbbeqfi97ofs5vpvf6cgse9j0pnrpd5.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: "http://localhost:8081/auth/google"
+},
+async function(accessToken, refreshToken, profile, done) {
+  try {
+    const connection = await pool.getConnection();
+    const [results, fields] = await connection.execute('SELECT * FROM users WHERE user_id = ?', [profile.user_id]);
+    connection.release();
+
+    if (results.length === 0) {
+      // User doesn't exist, create new user
+      const [insertResult, insertFields] = await connection.execute('INSERT INTO users (user_id, email) VALUES (?, ?)', [profile.user_id, profile.email[0].value]);
+      return done(null, insertResult.insertId);
+    } else {
+      // User exists, return user id
+      return done(null, results[0].id);
+    }
+  } catch (err) {
+    console.error('Error with Google OAuth:', err);
+    return done(err, null);
+  }
+}
+));
+
+// Serialize user for session
+passport.serializeUser(function(user, done) {
+done(null, user);
+});
+
+// Deserialize user from session
+passport.deserializeUser(function(id, done) {
+done(null, id);
+});
+
+// Route for Google OAuth login
+exports.googleLogin = passport.authenticate('google', { scope: ['profile', 'email'] });
+
+// Callback route for Google OAuth
+exports.googleCallback = passport.authenticate('google', { failureRedirect: '/login' }),
+function(req, res) {
+  // Successful authentication, redirect home.
+  res.redirect('/');
 };

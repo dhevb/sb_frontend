@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const { createUser, loginUser,forgotPassword } = require('../controller/Auth');
+const { googleLogin, googleCallback } = require('../controller/Auth');
 
+// Route for Google OAuth login
+router.get('/google', googleLogin);
+
+// Route for Google OAuth callback
+router.get('/google/callback', googleCallback);
 // Route for creating a new user
 router.post('/signup', createUser);
 

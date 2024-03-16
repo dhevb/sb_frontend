@@ -39,7 +39,7 @@ const items = useSelector(selectItems);
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to = 'all-products'>
+                <Link to = '/all-products'>
                 <a>All Products</a>
                 </Link>
               </li>
@@ -55,7 +55,7 @@ const items = useSelector(selectItems);
                 </ul>
               </li>
               <li>
-              <Link to = 'about-us'>
+              <Link to = '/about-us'>
                 <a>About us</a>
                 </Link>
               </li>
@@ -70,7 +70,9 @@ const items = useSelector(selectItems);
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 z-10">
             <li>
+              <Link to = "/all-products">
               <a>All Products</a>
+              </Link>
             </li>
             <li>
               <details>
@@ -86,7 +88,7 @@ const items = useSelector(selectItems);
               </details>
             </li>
             <li>
-            <Link to = 'about-us'>
+            <Link to = '/about-us'>
                 <a>About us</a>
                 </Link>
             </li>
