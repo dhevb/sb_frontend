@@ -122,17 +122,18 @@ exports.forgotPassword = async (req, res) => {
 passport.use(new GoogleStrategy({
   clientID: '922589496437-8rbbeqfi97ofs5vpvf6cgse9j0pnrpd5.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: "http://localhost:8081/auth/google"
+  callbackURL: "http://localhost:3000/"
 },
 async function(accessToken, refreshToken, profile, done) {
+  console.log(profile);
   try {
     const connection = await pool.getConnection();
-    const [results, fields] = await connection.execute('SELECT * FROM users WHERE user_id = ?', [profile.user_id]);
+    const [results, fields] = await connection.execute('SELECT * FROM users WHERE id = ?', [profile.id]);
     connection.release();
 
     if (results.length === 0) {
       // User doesn't exist, create new user
-      const [insertResult, insertFields] = await connection.execute('INSERT INTO users (user_id, email) VALUES (?, ?)', [profile.user_id, profile.email[0].value]);
+      const [insertResult, insertFields] = await connection.execute('INSERT INTO users (id, email) VALUES (?, ?)', [profile.id, profile.emails[0].value]);
       return done(null, insertResult.insertId);
     } else {
       // User exists, return user id
