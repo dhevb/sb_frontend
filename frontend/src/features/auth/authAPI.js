@@ -61,3 +61,6 @@ export async function signOut(userId) {
 export function googleLogin() {
   window.location.href = 'http://localhost:8081/auth/google'; // Replace with your backend's Google OAuth login route
 }
+export function googleCallback() {
+  window.location.href = 'http://localhost:8081/auth/google/callback'; // Replace with your backend's Google OAuth login route
+}

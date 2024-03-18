@@ -53,10 +53,12 @@ export default function ProductDetail() {
     e.preventDefault();
     if (items.findIndex((item) => item.product.id === product.id) < 0) {
       console.log({ items, product });
+     
       const newItem = {
+        price:product.price,
         product: product.id,
-        quantity: 1,
-        user:user.id
+        quantity: product.quantity,
+        user_id:user.id
         
       };
       dispatch(addToCartAsync(newItem));
