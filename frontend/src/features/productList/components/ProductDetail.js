@@ -58,7 +58,9 @@ export default function ProductDetail() {
         product_id: product.id,
         quantity: 1,
         user_id:localStorage.getItem("id"),  
-        price:product.price  
+        price:product.price,
+        discount_price:product.discount_price,
+      
       };
       dispatch(addToCartAsync(newItem));
       toast.success('Item added to Cart');
@@ -163,7 +165,7 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-               ${product.price}
+               ${product.discount_price}
               </p>
 
               {/* Reviews */}
