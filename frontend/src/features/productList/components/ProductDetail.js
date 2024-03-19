@@ -51,13 +51,12 @@ export default function ProductDetail() {
 
   const handleCart = (e) => {
     e.preventDefault();
-    if (items.findIndex((item) => item.product.id === product.id) < 0) {
+    if (items.findIndex((item) => item.product_id === product.id) < 0) {
       console.log({ items, product });
       const newItem = {
-        product: product.id,
+        product_id: product.id,
         quantity: 1,
-        user:user.id
-        
+        user_id:localStorage.getItem("id")       
       };
       dispatch(addToCartAsync(newItem));
       toast.success('Item added to Cart');

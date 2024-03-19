@@ -99,9 +99,9 @@ function App() {
   const user = useSelector(selectLoggedInUser)
 
   useEffect(() => {
-    if(user){
-    dispatch(fetchItemsByUserIdAsync(user.id))
-    }
+    
+    dispatch(fetchItemsByUserIdAsync(localStorage.getItem("id")))
+  
   }, [dispatch, user])
 
   return (

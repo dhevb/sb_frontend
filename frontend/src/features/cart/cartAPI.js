@@ -16,8 +16,10 @@ export function addToCart(item) {
 export function fetchItemsByUserId(userId) {
   return new Promise(async (resolve) => {
     //TODO: we will not hard-code server URL here
+
     const response = await fetch('http://localhost:8081/cart?users=' + userId);
     const data = await response.json();
+    console.log(data);
     resolve({ data });
   });
 }

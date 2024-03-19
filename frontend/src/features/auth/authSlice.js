@@ -49,27 +49,34 @@ export const counterSlice = createSlice({
     builder
       .addCase(createUserAsync.pending, (state) => {
         state.status = 'loading';
+        console.log("updateUserAsync2")
       })
       .addCase(createUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.loggedInUser = action.payload;
+        console.log("updateUserAsync2"+ action.payload)
       })
       .addCase(checkUserAsync.pending, (state) => {
         state.status = 'loading';
+        console.log("updateUserAsync2")
       })
       .addCase(checkUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
         state.loggedInUser = action.payload;
+        console.log("updateUserAsync2"+ action.payload)
       })
       .addCase(checkUserAsync.rejected, (state, action) => {
         state.status = 'idle';
+        console.log("updateUserAsync2"+ action.error)
         state.error = action.error;
       }) 
       .addCase(updateUserAsync.pending, (state) => {
         state.status = 'loading';
+        console.log("updateUserAsync2")
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.status = 'idle';
+        console.log("updateUserAsync2"+ action.payload)
         state.loggedInUser = action.payload;
       })
       
