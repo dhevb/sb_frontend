@@ -20,6 +20,7 @@ export async function checkUser(loginInfo) {
     });
     if (response.ok) {
       const data = await response.json();
+      localStorage.setItem("id", data.id)
       resolve ({ data });
     } else {
       const error = await response.json();
@@ -55,6 +56,7 @@ export async function forgotPassword(loginInfo) {
 
 export async function signOut(userId) {
   // You can implement sign out functionality if needed
+  localStorage.setItem("id", "0");
   console.log('Sign out functionality not implemented on the client side.');
 }
 
