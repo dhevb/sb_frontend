@@ -56,10 +56,10 @@ export default function ProductDetail() {
      
       const newItem = {
         product_id: product.id,
-        quantity: product.quantity,
+        quantity:2,
         user_id: localStorage.getItem("id"),  
         price: product.price, // Regular price
-        name:product.name // Discounted price
+        name:product.title // Discounted price
       };
       dispatch(addToCartAsync(newItem));
       toast.success('Item added to Cart');

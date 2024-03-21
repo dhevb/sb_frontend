@@ -17,7 +17,7 @@ export default function Cart() {
 
   const items = useSelector(selectItems);
   const totalAmount = items.reduce(
-    (amount, item) => item.discount_price * item.quantity + amount,
+    (amount, item) => item.price * item.quantity + amount,
     0
   );
   const totalItems = items.reduce((total, item) => item.quantity + total, 0);
