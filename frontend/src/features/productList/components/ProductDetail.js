@@ -51,6 +51,13 @@ export default function ProductDetail() {
 
   const handleCart = (e) => {
     e.preventDefault();
+    
+    const userId = localStorage.getItem("id");
+
+    if(!userId){
+      window.location.href = "/login" ;
+    } else {
+
     if (items.findIndex((item) => item.product_id === product.id) < 0) {
       console.log({ items, product });
      
@@ -59,6 +66,7 @@ export default function ProductDetail() {
         quantity: product.quantity,
         user_id: localStorage.getItem("id"),  
         price: product.price, // Regular price
+        discount: product.discount,
         name:product.name // Discounted price
       };
       dispatch(addToCartAsync(newItem));
@@ -66,7 +74,8 @@ export default function ProductDetail() {
     } else {
       toast.error('Item Already added');
     }
-  };
+  }
+};
 
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
@@ -162,12 +171,12 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-              ${Math.round( product.price * (1 - product.discountPercentage / 100)
+              ${Math.round( product.price * (1 - product.discount / 100)
                       )}
               </p>
               <p className="text-sm block line-through font-medium text-gray-400">
                       ${product.price}
-                    </p>
+              </p>
               {/* Reviews */}
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>

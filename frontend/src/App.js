@@ -41,20 +41,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <LoginPage/>
+    element: localStorage.getItem("id") === "" ? <LoginPage /> :<LoginPage/>
   },
   {
     path: "/signup",
-    element: <SignupPage/>
+    element: localStorage.getItem("id") === "" ? <LoginPage /> : <SignupPage/>
   },
   {
     path: "/cart",
-    element: <CartPage/>
+    element: localStorage.getItem("id") === "" ? <LoginPage /> : <CartPage/>,
   },
   {
     path: '/profile',
     element: (
-      <UserProfilePage></UserProfilePage>
+        <Protected><UserProfilePage/></Protected>
     ),
   },
   
