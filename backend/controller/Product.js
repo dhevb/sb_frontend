@@ -11,10 +11,10 @@ const pool = mysql.createPool({
 });
 
 exports.createProduct = async (req, res) => {
-  const { title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images, deleted } = req.body;
+  const { title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images, deleted,discount_price } = req.body;
   try {
     const connection = await pool.getConnection();
-    const [result, fields] = await connection.execute('INSERT INTO products (title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images, deleted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, JSON.stringify(images), deleted]);
+    const [result, fields] = await connection.execute('INSERT INTO products (title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, images, deleted,discount_price) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [title, description, price, discountPercentage, rating, stock, brand, category, thumbnail, JSON.stringify(images), deleted,discount_price]);
     connection.release();
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (err) {

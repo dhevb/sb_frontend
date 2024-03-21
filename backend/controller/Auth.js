@@ -29,7 +29,7 @@ exports.createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10); // Hash the password
     const connection = await pool.getConnection();
-    const [results, fields] = await connection.execute('INSERT INTO users (email, password, role) VALUES (?, ?, ?)', [req.body.email, hashedPassword, req.body.role]);
+    const [results, fields] = await connection.execute('INSERT INTO users (email, password, role,name) VALUES (?, ?, ?,?)', [req.body.email, hashedPassword, req.body.role,req.body.name]);
     connection.release();
     
     // Generate JWT token

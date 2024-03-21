@@ -56,11 +56,10 @@ export default function ProductDetail() {
      
       const newItem = {
         product_id: product.id,
-        quantity: 1,
-        user_id:localStorage.getItem("id"),  
-        price:product.price,
-        discount_price:product.discount_price,
-      
+        quantity: product.quantity,
+        user_id: localStorage.getItem("id"),  
+        price: product.price, // Regular price
+        name:product.name // Discounted price
       };
       dispatch(addToCartAsync(newItem));
       toast.success('Item added to Cart');
@@ -68,8 +67,6 @@ export default function ProductDetail() {
       toast.error('Item Already added');
     }
   };
-  
-  
 
   useEffect(() => {
     dispatch(fetchAllProductByIdAsync(params.id));
@@ -165,9 +162,12 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-               ${product.discount_price}
+              ${Math.round( product.price * (1 - product.discountPercentage / 100)
+                      )}
               </p>
-
+              <p className="text-sm block line-through font-medium text-gray-400">
+                      ${product.price}
+                    </p>
               {/* Reviews */}
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>

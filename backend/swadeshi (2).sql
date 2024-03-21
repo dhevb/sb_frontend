@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `brands` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -40,20 +40,19 @@ CREATE TABLE `brands` (
 --
 
 CREATE TABLE `carts` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` bigint(11) NOT NULL,
+  `price` decimal(10,2),
+  `name` varchar(25)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `carts`
 --
 
-INSERT INTO `carts` (`id`, `quantity`, `product_id`, `user_id`) VALUES
-(12, 1, 1, 12),
-(13, 3, 1, 12),
-(14, 3, 1, 12);
+
 
 -- --------------------------------------------------------
 
@@ -62,7 +61,7 @@ INSERT INTO `carts` (`id`, `quantity`, `product_id`, `user_id`) VALUES
 --
 
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `label` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -74,7 +73,7 @@ CREATE TABLE `categories` (
 --
 
 CREATE TABLE `orders` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `items` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`items`)),
   `totalAmount` decimal(10,2) DEFAULT NULL,
   `totalItems` int(11) DEFAULT NULL,
@@ -98,7 +97,7 @@ INSERT INTO `orders` (`id`, `items`, `totalAmount`, `totalItems`, `user_id`, `pa
 --
 
 CREATE TABLE `products` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
@@ -126,7 +125,7 @@ INSERT INTO `products` (`id`, `title`, `description`, `price`, `discountPercenta
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
+  `id` bigint(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL DEFAULT 'user',
@@ -140,8 +139,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `role`, `name`, `addresses`, `orders`) VALUES
-(12, 'kandarisonal21200@gmail.com', '$2b$10$tLN53.8g0iNglZM2keptdelBlSV7gn/5i1OFW4HOn5WTsuxuwFR6C', 'user', NULL, NULL, NULL),
-(13, 'sonal12212001@gmail.com', '$2b$10$6.JcXB6imVDJQVFoMw..G..DACqHkvb1RY47QmUExMxLwePA4GIHe', 'user', NULL, NULL, NULL);
+
 
 --
 -- Indexes for dumped tables
