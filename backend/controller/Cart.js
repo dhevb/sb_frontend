@@ -29,7 +29,7 @@ exports.addToCart = async (req, res) => {
   try {
     const connection = await pool.getConnection();
     console.log(JSON.stringify(req.body));
-    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id,price,title) VALUES (?, ?, ?,?,?,?)', [req.body.quantity, req.body.product_id, req.body.user_id,req.body.price,req.body.title]);
+    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id,price,name) VALUES (?, ?, ?,?,?,?)', [req.body.quantity, req.body.product_id, req.body.user_id,req.body.price,req.body.title]);
     connection.release();
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (err) {

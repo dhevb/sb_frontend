@@ -63,7 +63,7 @@ export default function ProductDetail() {
      
       const newItem = {
         product_id: product.id,
-        quantity: product.quantity,
+        quantity:2,
         user_id: localStorage.getItem("id"),  
         price: product.price, // Regular price
         discount: product.discount,

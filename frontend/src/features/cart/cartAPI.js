@@ -7,7 +7,7 @@ export function addToCart(item) {
     });
     console.log(JSON.stringify(item));
     const data = await response.json();
-    console.log(response)
+    
     // TODO: on server it will only return some info of user (not password)
     resolve({ data });
   });
