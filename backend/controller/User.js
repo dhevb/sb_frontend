@@ -26,7 +26,7 @@ exports.updateUser = async (req, res) => {
   const { id } = req.params;
   try {
     const connection = await pool.getConnection();
-    const [result, fields] = await connection.execute('UPDATE users SET email = ?, password = ?, role = ?, addresses = ?, name = ?, orders = ? WHERE id = ?', [req.body.email, req.body.password, req.body.role, JSON.stringify(req.body.addresses), req.body.name, JSON.stringify(req.body.orders), id]);
+    const [result, fields] = await connection.execute('UPDATE users SET  addresses = ?, orders = ? WHERE id = ?', [JSON.stringify(req.body.addresses),JSON.stringify(req.body.orders), id]);
     connection.release();
     res.status(200).json({ id, ...req.body });
   } catch (err) {

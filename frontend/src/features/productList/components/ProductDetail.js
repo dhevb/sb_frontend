@@ -66,8 +66,7 @@ export default function ProductDetail() {
         quantity:2,
         user_id: localStorage.getItem("id"),  
         price: product.price, // Regular price
-        discount: product.discount,
-        name:product.name // Discounted price
+        name:product.title // Discounted price
       };
       dispatch(addToCartAsync(newItem));
       toast.success('Item added to Cart');
@@ -171,7 +170,7 @@ export default function ProductDetail() {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <p className="text-3xl tracking-tight text-gray-900">
-              ${Math.round( product.price * (1 - product.discount / 100)
+              ${Math.round( product.price * (1 - product.discountPercentage / 100)
                       )}
               </p>
               <p className="text-sm block line-through font-medium text-gray-400">

@@ -21,6 +21,7 @@ export async function checkUser(loginInfo) {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("id", data.id)
+
       resolve ({ data });
     } else {
       const error = await response.json();
@@ -53,16 +54,17 @@ export async function forgotPassword(loginInfo) {
     throw error;
   }
 }
-
-export async function signOut(userId) {
-  // You can implement sign out functionality if needed
-  localStorage.setItem("id", "0");
-  console.log('Sign out functionality not implemented on the client side.');
+export async function logoutUser() {
+  try {
+    // Clear session data from session storage
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("token");
+    
+    // Redirect to login page
+    window.location.href = '/login';
+  } catch (error) {
+    // Handle errors
+    console.error('Error logging out:', error);
+  }
 }
 
-export function googleLogin() {
-  window.location.href = 'http://localhost:8081/auth/google'; // Replace with your backend's Google OAuth login route
-}
-export function googleCallback() {
-  window.location.href = 'http://localhost:8081/auth/google/callback'; // Replace with your backend's Google OAuth login route
-}

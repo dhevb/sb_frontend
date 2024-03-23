@@ -60,7 +60,11 @@ const router = createBrowserRouter([
   
   {
     path: "/checkout",
-    element:<Protected><Checkout/></Protected>
+    element:<Checkout/>
+  },
+  {
+    path: "/forgot-password",
+    element:<ForgotPassword/>
   },
   {
     path: '/order-success/:id',

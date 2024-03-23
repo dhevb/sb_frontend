@@ -1,7 +1,9 @@
 const express = require('express');
 const server = express();
 const mysql = require('mysql2/promise');
-const cors = require('cors')
+const cors = require('cors');
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const productsRouter = require('./routes/Products');
 const categoriesRouter = require('./routes/Categories');
@@ -10,27 +12,30 @@ const usersRouter = require('./routes/Users');
 const authRouter = require('./routes/Auth');
 const cartRouter = require('./routes/Cart');
 const ordersRouter = require('./routes/Order');
-const bodyParser=require('body-parser');
-const cookieParser = require('cookie-parser');
 
-
-//middlewares attached
 server.use(cors({
     exposedHeaders:['X-Total-Count']
-}))
-server.use(express.json()); // to parse the req.body
+}));
+server.use(express.json());
 server.use(cookieParser());
-server.use('/products', productsRouter)
-server.use('/categories', categoriesRouter)
-server.use('/brands', brandsRouter)
-server.use('/users', usersRouter)
-server.use('/auth', authRouter)
-server.use('/cart', cartRouter)
-server.use('/orders', ordersRouter)
+server.use(session({
+    secret: 'asap123@',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true } // Set to true if using HTTPS
+}));
 
-main().catch(err=> console.log(err));
+server.use('/products', productsRouter);
+server.use('/categories', categoriesRouter);
+server.use('/brands', brandsRouter);
+server.use('/users', usersRouter);
+server.use('/auth', authRouter);
+server.use('/cart', cartRouter);
+server.use('/orders', ordersRouter);
 
-async function main(){
+main().catch(err => console.log(err));
+
+async function main() {
     const pool = mysql.createPool({
         host: 'localhost',
         user: 'root',
@@ -39,15 +44,15 @@ async function main(){
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0
-      });
-    
-    console.log('database connected');
-    
-    server.get('/',(req, res)=>{
-        res.json({status:'success'})
     });
-    
-    server.listen(8081, ()=>{
-        console.log('server started ')
+
+    console.log('Database connected');
+
+    server.get('/', (req, res) => {
+        res.json({ status: 'success' });
+    });
+
+    server.listen(8081, () => {
+        console.log('Server started');
     });
 }

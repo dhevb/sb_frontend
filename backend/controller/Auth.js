@@ -18,7 +18,7 @@ const pool = mysql.createPool({
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 578,
+  port: 25,
   auth: {
     user: "holisticeducation052021@gmail.com",
     pass: "girp yqus ccja ntow"
@@ -74,6 +74,16 @@ exports.loginUser = async (req, res) => {
     res.status(400).json({ message: 'Error logging in user' });
   }
 };
+exports.logoutUser = async (req, res) => {
+  try {
+    // Clear the authentication token from the client's cookies
+    res.clearCookie('token');
+    res.status(200).json({ message: 'Logout successful' });
+  } catch (err) {
+    console.error('Error logging out user:', err);
+    res.status(500).json({ message: 'Error logging out user' });
+  }
+};
 
 exports.forgotPassword = async (req, res) => {
   console.log(req.body);
@@ -122,7 +132,7 @@ exports.forgotPassword = async (req, res) => {
 passport.use(new GoogleStrategy({
   clientID: '922589496437-8rbbeqfi97ofs5vpvf6cgse9j0pnrpd5.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: "http://localhost:8081/auth/google"
+  callbackURL: "http://localhost:8081/auth/google/callback"
 },
 async function(accessToken, refreshToken, profile, done) {
 
