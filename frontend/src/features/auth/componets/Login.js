@@ -10,7 +10,7 @@ export default function Login() {
   const [values, setValues] = useState({
     email: '',
     password: '',
-    
+    role:localStorage.getItem("role")
   });
   const navigate = useNavigate();
   const [errors, setErrors] = useState({});
@@ -21,15 +21,22 @@ export default function Login() {
 
   const handleSubmit = (data) => {
     data.preventDefault();
-    setErrors(Validation(values));
-    if (errors.email === "" && errors.password === "") {
-      checkUser(values) // Use checkUser function from authApi
-         .then((res) => {
-            navigate('/');
-          }) 
-       .catch((err) => console.log(err));
-    }
+    setErrors(Validation(values)); // Validate the form fields
+    console.log(values);
+    checkUser(values)
+    
+      .then((res) => {
+        
+        const userRole = localStorage.getItem("role"); 
+        if (userRole === 'user') {
+          navigate('/');
+        } else if (userRole === 'admin') {
+          navigate('/add-product');
+        }
+      })
+      .catch((err) => console.log(err));
   };
+
    const handleGoogleLogin = () => {
     window.location.href = 'http://localhost:8081/auth/google'; // Replace with your backend's Google OAuth login route
   };
@@ -93,7 +100,6 @@ export default function Login() {
           />
           {errors.password &&<span className="text-red-500">{errors.password}</span>}
         </div>
-
                 <div className="flex justify-end">
                   <a
                     href="/forgot-password"

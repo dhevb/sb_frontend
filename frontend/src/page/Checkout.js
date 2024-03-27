@@ -24,7 +24,7 @@ function Checkout() {
   } = useForm();
 
   const user =  localStorage.getItem("id");
-  const items = useSelector(selectItems);
+  const items = localStorage.getItem("quantity");
   const currentOrder = useSelector(selectCurrentOrder);
 
   const totalAmount = items.reduce(

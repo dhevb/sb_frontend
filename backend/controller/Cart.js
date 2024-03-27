@@ -14,7 +14,6 @@ const pool = mysql.createPool({
 exports.fetchCartByUser = async (req, res) => {
   const { user } = req.query;
   try {
-    console.log(req.query);
     const connection = await pool.getConnection();
     const [results, fields] = await connection.execute('SELECT * FROM carts WHERE user_id = ?', [req.query.users]);
     connection.release();
@@ -29,7 +28,7 @@ exports.addToCart = async (req, res) => {
   try {
     const connection = await pool.getConnection();
     console.log(JSON.stringify(req.body));
-    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id,price,name) VALUES (?, ?, ?,?,?,?)', [req.body.quantity, req.body.product_id, req.body.user_id,req.body.price,req.body.name]);
+    const [result, fields] = await connection.execute('INSERT INTO carts (quantity, product_id, user_id,price,name) VALUES (?, ?, ?,?,?)', [req.body.quantity, req.body.product_id, req.body.user_id,req.body.price,req.body.name]);
     connection.release();
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (err) {

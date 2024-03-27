@@ -3,15 +3,21 @@ import { MdOutlineProductionQuantityLimits } from "react-icons/md";
 import { FaCartShopping } from "react-icons/fa6";
 import { CiSearch } from "react-icons/ci";
 import {Link} from "react-router-dom"
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { selectItems } from "../cart/cartSlice";
 import logo from "../../assets/logo.png"
-
+import { logout } from '../auth/authSlice';
 
 export default function Navbar() {
 
 const items = useSelector(selectItems);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.auth.isAuthenticated); // Assuming you have authentication state
 
+  const handleLogout = () => {
+    dispatch(logout()); // Dispatch the logout action
+    // Perform any other logout-related actions if needed
+  };
   return (
     <div>
       {/* navbar */}
@@ -145,11 +151,19 @@ const items = useSelector(selectItems);
           </div>
         </Link>  
 
-          <Link to = '/login'>
-          <a className="text-2xl p-3 hover:text-orange-400" href="/login">
-            <MdAccountCircle></MdAccountCircle>
-          </a>
-          </Link>
+        {isAuthenticated ? (
+              <Link to="/login" onClick={handleLogout}>
+                <a className="text-2xl p-3 hover:text-orange-400">
+                  Logout
+                </a>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <a className="text-2xl p-3 hover:text-orange-400">
+                  <MdAccountCircle />
+                </a>
+              </Link>
+            )}
         </div>
       </div>
       </div>

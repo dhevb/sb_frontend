@@ -6,6 +6,7 @@ export  function createUser(userData) {
       headers: { 'content-type': 'application/json' },
     });
     const data = await response.json();
+
     resolve( { data });
   } );
 }
@@ -21,7 +22,9 @@ export async function checkUser(loginInfo) {
     if (response.ok) {
       const data = await response.json();
       localStorage.setItem("id", data.id)
-
+      localStorage.setItem("role", data.role)
+      localStorage.setItem("token", data.token)
+      
       resolve ({ data });
     } else {
       const error = await response.json();
@@ -54,17 +57,23 @@ export async function forgotPassword(loginInfo) {
     throw error;
   }
 }
-export async function logoutUser() {
+
+export async function logout() {
   try {
-    // Clear session data from session storage
-    sessionStorage.removeItem("id");
-    sessionStorage.removeItem("token");
-    
-    // Redirect to login page
-    window.location.href = '/login';
+    const response = await fetch('http://localhost:8081/auth/logout', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return { data };
+    } else {
+      const error = await response.json();
+      throw error;
+    }
   } catch (error) {
-    // Handle errors
     console.error('Error logging out:', error);
+    throw error;
   }
 }
 
