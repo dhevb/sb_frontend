@@ -6,10 +6,10 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'swadeshi',
+  host:process.env.DB_HOST,
+  user:process.env.DB_USER,
+  password:process.env.DB_PASSWORD,
+  database:process.env.DB_DATABASE,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0
@@ -17,11 +17,11 @@ const pool = mysql.createPool({
 
 // Nodemailer transporter using SMTP
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 25,
+  host: process.env.SMTP_HOST,
+  port:process.env.SMTP_POR,
   auth: {
-    user: "holisticeducation052021@gmail.com",
-    pass: "girp yqus ccja ntow"
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS
   }
 });
 
@@ -33,7 +33,7 @@ exports.createUser = async (req, res) => {
     connection.release();
     
     // Generate JWT token
-    const token = jwt.sign({ id: results.insertId, role: results.role }, 'q#P6v@6nTw9u%4Z@2yG!S$e&8Lp3F@Rb');
+    const token = jwt.sign({ id: results.insertId, role: results.role }, process.env.JWT_TOKEN);
     
     // Set token in cookie
     res.cookie('token', token, { httpOnly: true });
@@ -60,7 +60,7 @@ exports.loginUser = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(req.body.password, user.password); // Compare hashed password
     if (isPasswordValid) {
       // Generate JWT token
-      const token = jwt.sign({ id: user.id, role: user.role }, '123@js5ef');
+      const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET);
       
       // Set token in cookie
       res.cookie('token', token, { httpOnly: true });
@@ -108,7 +108,7 @@ exports.forgotPassword = async (req, res) => {
 
     
     const mailOptions = {
-      from: 'holisticeducation052021@gmail.com', 
+      from: process.env.SMTP_USER, 
       to: req.body.email,
       subject: 'Password Reset',
       text: `Your temporary password is: ${tempPassword}. Please use this to login and reset your password.`,
@@ -130,9 +130,9 @@ exports.forgotPassword = async (req, res) => {
 };
 
 passport.use(new GoogleStrategy({
-  clientID: '922589496437-8rbbeqfi97ofs5vpvf6cgse9j0pnrpd5.apps.googleusercontent.com',
-  clientSecret: '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',
-  callbackURL: "http://localhost:8081/auth/google/callback"
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: process.env.GOOGLE_CALLBACK_URL
 },
 async function(accessToken, refreshToken, profile, done) {
 

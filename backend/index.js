@@ -19,7 +19,7 @@ server.use(cors({
 server.use(express.json());
 server.use(cookieParser());
 server.use(session({
-    secret: 'asap123@',
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: true } // Set to true if using HTTPS
@@ -37,10 +37,9 @@ main().catch(err => console.log(err));
 
 async function main() {
     const pool = mysql.createPool({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'swadeshi',
+        host:process.env.DB_HOST,
+        password:process.env.DB_PASSWORD,
+        database:process.env.DB_DATABASE,
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0
